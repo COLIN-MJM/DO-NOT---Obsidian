@@ -172,6 +172,8 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "conflict-manager:Conflict hub": false,
+      "direct-git-sync:Sync with GitHub": false,
       "switcher:Ouvrir le sélecteur rapide": false,
       "graph:Ouvrir la vue graphique": false,
       "canvas:Créer une nouvelle toile": false,
