@@ -1,5 +1,5 @@
 [
   "conflict-manager",
   "kanban-bases-view",
-  "local-git-sync"
+  "direct-git-sync"
 ]
