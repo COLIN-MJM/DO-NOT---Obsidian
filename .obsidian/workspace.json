@@ -11,10 +11,14 @@
             "id": "5e649b06ee210d54",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Salutation.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nouvel onglet"
+              "title": "Salutation"
             }
           }
         ]
@@ -184,5 +188,7 @@
     }
   },
   "active": "5e649b06ee210d54",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Salutation.md"
+  ]
 }
