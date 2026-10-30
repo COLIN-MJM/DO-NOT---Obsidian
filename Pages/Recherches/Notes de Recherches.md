@@ -1,6 +1,7 @@
 ---
 tags:
   - recherches
+icon: 🔎
 ---
 ### Global
 ___

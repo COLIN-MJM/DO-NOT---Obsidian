@@ -1,6 +1,7 @@
 ---
 tags:
   - recherches
+icon: 🔎
 ---
 
 ## Baba Is You

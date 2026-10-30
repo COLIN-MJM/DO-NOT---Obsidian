@@ -21,5 +21,10 @@
   "supercharged-links@@6935-655c-color": "#FFFFFF",
   "supercharged-links@@6935-655c-background-color": "#631F1F",
   "supercharged-links@@c-6935-655c-use-background": true,
-  "supercharged-links@@6935-655c-before": "⚠️ "
+  "supercharged-links@@6935-655c-before": "⚠️ ",
+  "supercharged-links@@b132-edd8-before": "🗓️ ",
+  "supercharged-links@@5c9c-00ea-color": "#DFA797",
+  "supercharged-links@@5c9c-00ea-before": "🏠 ",
+  "supercharged-links@@c-5c9c-00ea-use-background": true,
+  "supercharged-links@@5c9c-00ea-background-color": "#1A2A47"
 }

@@ -1,4 +1,5 @@
 ---
 tags:
   - programmation
+icon: 💻
 ---

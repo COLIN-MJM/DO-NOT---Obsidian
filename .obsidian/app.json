@@ -9,5 +9,7 @@
   "foldHeading": true,
   "rightToLeft": false,
   "spellcheck": true,
-  "autoPairBrackets": true
+  "autoPairBrackets": true,
+  "showUnsupportedFiles": false,
+  "propertiesInDocument": "visible"
 }

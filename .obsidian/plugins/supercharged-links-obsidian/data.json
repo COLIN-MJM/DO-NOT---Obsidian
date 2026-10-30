@@ -137,6 +137,18 @@
       "selectAppend": true,
       "selectPrepend": true,
       "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "home",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "5c9c-00ea",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
     }
   ]
 }

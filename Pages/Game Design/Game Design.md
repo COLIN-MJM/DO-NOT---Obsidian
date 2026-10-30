@@ -1,6 +1,7 @@
 ---
 tags:
   - gamedesign
+icon: 📚
 ---
 ### Jeu
 ___
