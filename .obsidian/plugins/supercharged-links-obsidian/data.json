@@ -29,6 +29,66 @@
       "selectAppend": true,
       "selectPrepend": true,
       "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "documentation",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "6af0-ffe4",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "recherches",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "9280-70d0",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "identity",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "9f4d-4f89",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "ability",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "791c-31d6",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "verb",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "99fe-34c7",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
     }
   ]
 }

@@ -1,5 +1,16 @@
 {
-  "supercharged-links@@c-0f61-401b-use-background": true,
-  "supercharged-links@@0f61-401b-before": "📦",
-  "supercharged-links@@0f61-401b-background-color": "#1A3D25"
+  "supercharged-links@@c-0f61-401b-use-background": false,
+  "supercharged-links@@0f61-401b-before": "📦 ",
+  "supercharged-links@@0f61-401b-background-color": "#1A3D25",
+  "supercharged-links@@6af0-ffe4-color": "#EC8D24",
+  "supercharged-links@@9280-70d0-color": "#53A1F9",
+  "supercharged-links@@9f4d-4f89-color": "#9955D9",
+  "supercharged-links@@c-9f4d-4f89-use-background": false,
+  "supercharged-links@@9f4d-4f89-background-color": "#201538",
+  "supercharged-links@@9f4d-4f89-before": "🧍‍♂️ ",
+  "supercharged-links@@791c-31d6-color": "#C43917",
+  "supercharged-links@@6af0-ffe4-before": "📚 ",
+  "supercharged-links@@791c-31d6-before": "❗ ",
+  "supercharged-links@@99fe-34c7-color": "#CA26C1",
+  "supercharged-links@@99fe-34c7-before": "💭 "
 }
