@@ -8,3 +8,16 @@ Après les premières conclusions du [[Prototype v1]] ainsi que la période de r
 
 ## Documentation
 ___
+- [[Game Design]]
+- Documentation technique
+- Direction Artistique
+
+## Recherches
+___
+- Références
+- Notes de
+
+## Versions
+___
+- Prototype v1
+- Prototype v2
