@@ -1,4 +1,13 @@
 {
   "promptDelete": false,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "showInlineTitle": true,
+  "readableLineLength": true,
+  "strictLineBreaks": false,
+  "showLineNumber": false,
+  "foldIndent": true,
+  "foldHeading": true,
+  "rightToLeft": false,
+  "spellcheck": true,
+  "autoPairBrackets": true
 }
