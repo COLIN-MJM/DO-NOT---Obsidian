@@ -1,5 +1,6 @@
 ---
 banner: "[[![[Pasted image 20261030145254.png]]]]"
+icon: 🏡
 ---
 
 ## Pitch (Toy)

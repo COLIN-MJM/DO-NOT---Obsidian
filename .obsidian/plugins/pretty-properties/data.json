@@ -1,5 +1,8 @@
 {
-  "hiddenProperties": [],
+  "hiddenProperties": [
+    "banner",
+    "icon"
+  ],
   "markdownProperties": [],
   "propertyPillColors": {},
   "propertyLongtextColors": {},
@@ -17,7 +20,7 @@
   ],
   "coverShapeProperty": "cover_shape",
   "coverPositionProperty": "cover_position",
-  "bannerHeight": 150,
+  "bannerHeight": 100,
   "bannerHeightMobile": 100,
   "bannerHeightPopover": 100,
   "bannerMargin": -20,
@@ -46,8 +49,8 @@
   "showExtraFormattings": false,
   "showMdProperties": false,
   "iconsFolder": "",
-  "iconSize": 70,
-  "iconTopMargin": 70,
+  "iconSize": 90,
+  "iconTopMargin": 30,
   "iconTopMarginMobile": 44,
   "iconTopMarginWithoutBanner": -10,
   "iconLeftMargin": 0,
@@ -93,7 +96,7 @@
   },
   "coverPosition": "left",
   "enableBannersInPopover": false,
-  "enableIconsInPopover": false,
+  "enableIconsInPopover": true,
   "enableCoversInPopover": false,
   "hideAllEmptyProperties": false,
   "hiddenWhenEmptyProperties": [],
