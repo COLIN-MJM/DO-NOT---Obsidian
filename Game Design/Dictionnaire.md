@@ -21,7 +21,6 @@ ______________
 > 
 > - Les [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) sont soumises à un arbre de construction syntaxique, qui permet d’assurer une certaine logique dans l’énoncé des [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
 > - L’éditeur de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) empêche ainsi le placement de certains [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) en fonction de ces [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de construction.
-> ![[Schéma_Syntaxe.png]]
 
 ### Légende
 
