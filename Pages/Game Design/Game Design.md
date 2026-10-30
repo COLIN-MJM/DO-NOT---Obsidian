@@ -1,3 +1,7 @@
+---
+tags:
+  - documentation
+---
 ### Jeu
 ___
 - [[One Pager]]

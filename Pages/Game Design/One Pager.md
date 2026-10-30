@@ -1,6 +1,8 @@
 ---
 banner: "#fe9d169e"
 icon: 🎯
+tags:
+  - documentation
 ---
 # Le jeu et la règle
 

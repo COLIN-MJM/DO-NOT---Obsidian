@@ -1,3 +1,7 @@
+---
+tags:
+  - recherches
+---
 ### Global
 ___
 - [[Projet - Recherches]]

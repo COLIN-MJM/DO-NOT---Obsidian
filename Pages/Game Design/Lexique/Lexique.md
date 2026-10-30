@@ -1,3 +1,7 @@
+---
+tags:
+  - documentation
+---
 ### Définitions globales
 ______________
 #### <span style="color:#f76707">Token</span>

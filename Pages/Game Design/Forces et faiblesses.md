@@ -1,3 +1,7 @@
+---
+tags:
+  - documentation
+---
 ## ↗️ Forces :
 
 - Système déclinable ;
