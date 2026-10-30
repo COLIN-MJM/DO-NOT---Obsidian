@@ -29,18 +29,6 @@
       "selectAppend": true,
       "selectPrepend": true,
       "selectBackground": true
-    },
-    {
-      "type": "path",
-      "name": "token",
-      "value": "Game Design",
-      "matchCaseSensitive": false,
-      "match": "exact",
-      "uid": "2d02-2073",
-      "selectText": true,
-      "selectAppend": true,
-      "selectPrepend": true,
-      "selectBackground": true
     }
   ]
 }
