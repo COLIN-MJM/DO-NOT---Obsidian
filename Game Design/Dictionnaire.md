@@ -1,6 +1,6 @@
 ### Définitions globales
 ______________
-#### Token
+#### <span style="color:#623a2d">Token</span>
 
 > [!info]
 > - Un Token est la plus petite brique de construction d’une phrase logique.
@@ -8,11 +8,11 @@ ______________
 > - En fonction de son type, il peut servir à identifier une [Identity](https://app.notion.com/p/3f862d77a12d8028a85bc0703dc32b22?pvs=21), une [Ability](https://app.notion.com/p/3f862d77a12d8004b619f0b8f2939294?pvs=21) ou peut servir d’élément logique d’assignation via les [Verbs](https://app.notion.com/p/3f862d77a12d80acb64ad4c1a0034d0b?pvs=21).
 
 Il existe 4 types de tokens :
-- Identity
-- Ability
-- Verbs
-- Autre
-#### Règle
+- [[Identity]]
+- [[Ability]]
+- [[Verbs]]
+- [[Autre]]
+#### <span style="color:#1c7ed6">Règle</span>
 
 > [!info]
 > - Une [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est une suite logique de [Token](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21)s, qui agit en temps réel sur le monde.
@@ -20,7 +20,7 @@ Il existe 4 types de tokens :
 > - Le joueur a accès en temps réel cette série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21), et peut venir y déplacer les [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de façon à modifier le comportement du monde.
 > - Chaque [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est contrainte par des [limites syntaxiques](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
 
-#### Limites syntaxique
+#### <span style="color:#b58900">Limites syntaxique</span>
 
 > [!info]
 > 
