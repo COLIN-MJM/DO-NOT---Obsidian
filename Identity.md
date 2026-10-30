@@ -1,3 +1,2 @@
 Une [Identity](/p/3f862d77a12d8028a85bc0703dc32b22?v=3f862d77a12d80fba1a1000c1ab2d41b&pvs=25) est un [Token](/p/3f862d77a12d80b99a46f3ddf4a51b51?pvs=25#3f862d77a12d80b392ebdf33496ad42c) représentant un groupe d’acteur in-game, définit par des [Ability](/p/3f862d77a12d8004b619f0b8f2939294?v=3f862d77a12d804c8e68000c0cfb1633&pvs=25) à l’aide de [Verbs](/p/3f862d77a12d80acb64ad4c1a0034d0b?v=3f862d77a12d802d9ff3000c72f63558&pvs=25).
 
-![[Sans titre.base]]
