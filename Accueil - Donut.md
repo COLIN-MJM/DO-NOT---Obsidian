@@ -25,7 +25,3 @@ ___
 ___
 - [[Prototype v1]]
 - [[Prototype v2]]
-
-## Liens utiles
-___
-- [Figma](https://www.figma.com/board/WBqGTuEQUgGsv04mKEvrAt/Donut_ICAN_3JV?node-id=0-1&p=f&t=ygxyCXsZbrlEAs7U-0)

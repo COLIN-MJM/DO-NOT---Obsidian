@@ -1,3 +1,7 @@
+---
+banner: "#fe9d169e"
+icon: 🎯
+---
 # Le jeu et la règle
 
 ---
