@@ -1,0 +1,23 @@
+{
+  "secrets": {},
+  "outputLocations": {},
+  "outputSettings": {
+    "notion": {
+      "folder": "Test_Import_Notion",
+      "attachments": {
+        "mode": "note",
+        "path": ""
+      },
+      "duplicates": "create-copy",
+      "saveSourceId": true,
+      "idProperty": "notion-id",
+      "template": "",
+      "titleTemplate": "{{title}}"
+    }
+  },
+  "onenoteAttachments": {},
+  "sourceFolders": {
+    "notion": "C:\\Users\\emmas\\Downloads"
+  },
+  "lastSourceFolder": "C:\\Users\\emmas\\Downloads"
+}

@@ -14,10 +14,10 @@ ___
 
 ## Recherches
 ___
-- Références
-- Notes de
+- [[Références]]
+- [[Notes de Recherches]]
 
 ## Versions
 ___
-- Prototype v1
-- Prototype v2
+- [[Prototype v1]]
+- [[Prototype v2]]
