@@ -1,0 +1,54 @@
+views:
+  - type: table
+    name: Tableau
+    order:
+      - tags
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: list
+    name: Vue
+    filters:
+      and:
+        - file.tags == ["Ability"]
+    sort:
+      - property: tags
+        direction: ASC
+    columnOrders:
+      file.file:
+        - Accueil - Donut.md
+        - Direction Artistique/Direction Artistique.md
+        - Documentation Technique/Documentation Technique.md
+        - Game Design/3Cs.md
+        - Game Design/Boucle OCR.md
+        - Game Design/Diagramme de Ventrice.md
+        - Game Design/Fiche d'identité.md
+        - Game Design/Forces et faiblesses.md
+        - Game Design/Game Design.md
+        - Game Design/Game System.md
+        - Game Design/Inputs.md
+        - Game Design/Lexique/Lexique.md
+        - Game Design/Lexique/Tokens/Ability/Ability.md
+        - Game Design/Lexique/Tokens/Ability/Advance.md
+        - Game Design/Lexique/Tokens/Autre/Autre.md
+        - Game Design/Lexique/Tokens/Identity/Identity.md
+        - Game Design/Lexique/Tokens/Verbs/Verbs.md
+        - Game Design/One Pager.md
+        - Game Design/Signes et Feedbacks.md
+        - Game Design/Tendance système.md
+        - Prototypes/Prototype v1.md
+        - Prototypes/Prototype v2.md
+        - Recherches/Notes de Recherches.md
+        - Recherches/Projet - Recherches.md
+        - Recherches/Recherches_Individuelles/Ambre - Recherches.md
+        - Recherches/Recherches_Individuelles/Bart - Recherches.md
+        - Recherches/Recherches_Individuelles/Emma - Recherches.md
+        - Recherches/Recherches_Individuelles/Esteban - Recherches.md
+        - Recherches/Recherches_Individuelles/Ethan - Recherches.md
+        - Recherches/Recherches_Individuelles/Matthieu - Recherches.md
+        - Recherches/Références.md
+        - Sans titre.base
+    cardOrders:
+      file.file: {}
+    columnColors:
+      file.file: {}

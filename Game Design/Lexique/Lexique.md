@@ -15,17 +15,17 @@ Il existe 4 types de tokens :
 #### <span style="color:#1c7ed6">Règle</span>
 
 > [!info]
-> - Une [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est une suite logique de [Token](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21)s, qui agit en temps réel sur le monde.
-> - Dans le setting initial du monde, une série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est déjà mise en place.
+> - Une règle est une suite logique de Tokens, qui agit en temps réel sur le monde.
+> - Dans le setting initial du monde, une série de règles est déjà mise en place.
 > - Le joueur a accès en temps réel cette série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21), et peut venir y déplacer les [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de façon à modifier le comportement du monde.
-> - Chaque [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est contrainte par des [limites syntaxiques](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
+> - Chaque règle est contrainte par des limites syntaxiques.
 
 #### <span style="color:#b58900">Limites syntaxique</span>
 
 > [!info]
 > 
-> - Les [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) sont soumises à un arbre de construction syntaxique, qui permet d’assurer une certaine logique dans l’énoncé des [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
-> - L’éditeur de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) empêche ainsi le placement de certains [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) en fonction de ces [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de construction.
+> - Les règles sont soumises à un arbre de construction syntaxique, qui permet d’assurer une certaine logique dans l’énoncé des règles.
+> - L’éditeur de règles empêche ainsi le placement de certains Tokens en fonction de ces règles de construction.
 
 ### Légende
 
