@@ -28,15 +28,15 @@ Ces Tokens sont divisés en 4 types :
 	- L’Identity “Hero” réfère à l’avatar du héros du jeu, à travers sa représentation visuelle et son emplacement dans le monde  
 
 - Ability : Une Ability est un Token définissant un comportement autonome. Certaines Ability correspondent à un comportement dépendant de l’assignation à une Identity.
-	- L’Ability “[Advance]” correspond au comportement autonome d’avancer vers l’avant.
-	- L’Ability “[Look At]” correspond au comportement autonome de s’orienter en direction de l’Identity assignée dans la règle.  
+	- L’Ability “Advance” correspond au comportement autonome d’avancer vers l’avant.
+	- L’Ability “Look At” correspond au comportement autonome de s’orienter en direction de l’Identity assignée dans la règle.  
 
 - Verbs : Un Verb est un Token permettant de construire une règle en associant deux Tokens entre eux.
-	- Le Verb “[Is]” permet d’assigner à une Identity A à une Identity B.
-	- Le Verb “[Will]” permet d’assigner une Ability à une Identity.  
+	- Le Verb “Is” permet d’assigner à une Identity A à une Identity B.
+	- Le Verb “Will” permet d’assigner une Ability à une Identity.  
 
 - Autre : Certains Tokens comme “Player” ne rentrent dans aucun des précédents types, et sont définis individuellement par une fonction particulière dans une règle.
-	- Le token “Player” est un token unique représentant le joueur physique derrière son écran, à travers la manipulation du controller.  
+	- Le Token “Player” est un token unique représentant le joueur physique derrière son écran, à travers la manipulation du controller.  
 
 # Comment construire une règle ?
 
@@ -52,27 +52,23 @@ Un inventaire situé en bas de l'écran permet de stocker une copie de chaque to
 
 ![[Pasted image 20261030144155.png]]
 
-_ci dessus du drag and drop , drop sur un token déjà placer les 2 swap de place_
+Le drag'n drop permet également d'intervertir deux tokens de place.
 
-- Une [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est une suite logique de [Token](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21)s, qui agit en temps réel sur le monde.
-- Dans le setting initial du monde, une série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est déjà mise en place.
-- Le joueur a accès en temps réel cette série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21), et peut venir y déplacer les [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de façon à modifier le comportement du monde.
-- Chaque [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) est contrainte par des [limites syntaxiques](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
+## Règles
+
+- Une règle est une suite logique de Tokens, qui agit en temps réel sur le monde.
+- Dans le setting initial du monde, une série de règles est déjà mise en place.
+- Le joueur a accès en temps réel cette série de règles, et peut venir y déplacer les Tokens de façon à modifier le comportement du monde.
+- Chaque règle est contrainte par des limites syntaxiques.
 
 ## Limites syntaxique
 
-<aside>  
-💬
-
-- Les [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) sont soumises à un arbre de construction syntaxique, qui permet d’assurer une certaine logique dans l’énoncé des [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
-- L’éditeur de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) empêche ainsi le placement de certains [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) en fonction de ces [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de construction(bien qu’il n’en donne pas de sign/feedback visuel dans l’état actuel).
-
-![image.png](attachment:c2fad99d-e032-428c-8c74-bd32323d8105:image.png)
-
-</aside>
+- Les règles sont soumises à un arbre de construction syntaxique, qui permet d’assurer une certaine logique dans l’énoncé des règles.
+- L’éditeur de règles empêche ainsi le placement de certains Tokens en fonction de ces règles de construction (bien qu’il n’en donne pas de signe/feedback visuel dans l’état actuel).
 
 # Les règles donnent vie à un système
 ---
 La capacité à modifier les éléments ainsi que les comportements présents dans l’espace de jeu change la dynamique de jeu traditionnel des toys : on se rapproche plus du moteur de jeu (comme Scratch) que d’un bac à sable mécanique.
 
 Le fun vient alors de la manipulation et la découverte du champ des possibles, qui laisse au joueur la liberté de créer ses propres situations.
+
