@@ -108,7 +108,7 @@
   "hideMetadataContainerIfAllPropertiesHiddenReading": false,
   "autoHidePropertiesWithBanner": false,
   "hideCoverCollapsed": false,
-  "hidePropTitle": false,
+  "hidePropTitle": true,
   "hideAddPropertyButton": false,
   "dontShowColorMigrationMessage": false,
   "propertyColors": {},
