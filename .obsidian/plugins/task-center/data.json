@@ -1,0 +1,256 @@
+{
+  "queryPresets": [
+    {
+      "id": "preset-today",
+      "name": "Today",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "dir": "col",
+          "children": [
+            {
+              "id": "overdue",
+              "title": "Overdue",
+              "type": "list",
+              "when": {
+                "status": [
+                  "todo"
+                ],
+                "time": {
+                  "deadline": "overdue"
+                }
+              },
+              "orderBy": [
+                "deadline_asc"
+              ],
+              "limit": 3
+            },
+            {
+              "id": "today",
+              "title": "Today",
+              "type": "list",
+              "when": {
+                "status": [
+                  "todo"
+                ],
+                "time": {
+                  "scheduled": "today"
+                }
+              },
+              "limit": 3
+            },
+            {
+              "id": "unscheduled-rec",
+              "title": "Unscheduled",
+              "type": "list",
+              "when": {
+                "status": [
+                  "todo"
+                ],
+                "time": {
+                  "scheduled": "unscheduled",
+                  "deadline": "not-overdue"
+                }
+              },
+              "orderBy": [
+                "deadline_asc",
+                "created_desc"
+              ],
+              "limit": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "preset-week",
+      "name": "Week",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "dir": "col",
+          "children": [
+            {
+              "type": "week",
+              "when": {
+                "status": [
+                  "todo"
+                ]
+              }
+            },
+            {
+              "dir": "row",
+              "children": [
+                {
+                  "id": "unscheduled-tray",
+                  "title": "Unscheduled",
+                  "onDrop": {
+                    "clearScheduled": true
+                  },
+                  "type": "grid",
+                  "when": {
+                    "status": [
+                      "todo"
+                    ],
+                    "time": {
+                      "scheduled": "unscheduled"
+                    }
+                  }
+                },
+                {
+                  "title": "Drop",
+                  "onDrop": {
+                    "setStatus": "dropped"
+                  },
+                  "type": "drop"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "preset-month",
+      "name": "Month",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "dir": "col",
+          "children": [
+            {
+              "type": "month",
+              "when": {
+                "status": [
+                  "todo"
+                ]
+              }
+            },
+            {
+              "dir": "row",
+              "children": [
+                {
+                  "id": "unscheduled-tray",
+                  "title": "Unscheduled",
+                  "onDrop": {
+                    "clearScheduled": true
+                  },
+                  "type": "grid",
+                  "when": {
+                    "status": [
+                      "todo"
+                    ],
+                    "time": {
+                      "scheduled": "unscheduled"
+                    }
+                  }
+                },
+                {
+                  "title": "Drop",
+                  "onDrop": {
+                    "setStatus": "dropped"
+                  },
+                  "type": "drop"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "preset-todo",
+      "name": "TODO",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "type": "list",
+          "when": {
+            "status": [
+              "todo"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "preset-unscheduled",
+      "name": "Unscheduled",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "dir": "col",
+          "children": [
+            {
+              "type": "list",
+              "when": {
+                "status": [
+                  "todo"
+                ],
+                "time": {
+                  "scheduled": "unscheduled"
+                }
+              },
+              "orderBy": [
+                "deadline_risk",
+                "created_desc"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "preset-completed",
+      "name": "Completed",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "type": "list",
+          "when": {
+            "status": [
+              "done"
+            ]
+          },
+          "orderBy": [
+            "completed_desc"
+          ]
+        }
+      }
+    },
+    {
+      "id": "preset-dropped",
+      "name": "Dropped",
+      "builtin": true,
+      "hidden": false,
+      "view": {
+        "layout": {
+          "type": "list",
+          "when": {
+            "status": [
+              "dropped"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "deletedBuiltinIds": [],
+  "defaultSavedViewId": "preset-week",
+  "defaultView": "week",
+  "openOnStartup": false,
+  "weekStartsOn": 1,
+  "stampCreated": true,
+  "taskFormatFlavor": "tasks",
+  "lastTab": null,
+  "lastSavedViewId": "preset-week",
+  "mobileLongPressMs": 500,
+  "mobileSwipeEnabled": true,
+  "mobileForceLayout": false
+}
