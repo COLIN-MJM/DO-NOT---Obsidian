@@ -7,6 +7,11 @@ ______________
 > - Une suite valide de Token est une [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
 > - En fonction de son type, il peut servir à identifier une [Identity](https://app.notion.com/p/3f862d77a12d8028a85bc0703dc32b22?pvs=21), une [Ability](https://app.notion.com/p/3f862d77a12d8004b619f0b8f2939294?pvs=21) ou peut servir d’élément logique d’assignation via les [Verbs](https://app.notion.com/p/3f862d77a12d80acb64ad4c1a0034d0b?pvs=21).
 
+Il existe 4 types de tokens :
+- Identity
+- Ability
+- Verbs
+- Autre
 #### Règle
 
 > [!info]
