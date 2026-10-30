@@ -1,9 +1,0 @@
-{
-  "conflictFilePattern": "conflict",
-  "showStatusBarIndicator": true,
-  "configConflicts": true,
-  "diffDeleteColorLight": "#e93147",
-  "diffInsertColorLight": "#08b94e",
-  "diffDeleteColorDark": "#fb464c",
-  "diffInsertColorDark": "#44cf6e"
-}
