@@ -66,19 +66,14 @@
     {
       "id": "preset-week",
       "name": "Week",
-      "builtin": true,
+      "builtin": false,
       "hidden": false,
       "view": {
         "layout": {
           "dir": "col",
           "children": [
             {
-              "type": "week",
-              "when": {
-                "status": [
-                  "todo"
-                ]
-              }
+              "type": "month"
             },
             {
               "dir": "row",
@@ -248,7 +243,7 @@
   "weekStartsOn": 1,
   "stampCreated": true,
   "taskFormatFlavor": "tasks",
-  "lastTab": null,
+  "lastTab": "week",
   "lastSavedViewId": "preset-week",
   "mobileLongPressMs": 500,
   "mobileSwipeEnabled": true,
