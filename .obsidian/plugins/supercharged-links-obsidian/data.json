@@ -4,7 +4,8 @@
     "identity",
     "ability",
     "verb",
-    "autre"
+    "autre",
+    "prototype"
   ],
   "targetTags": true,
   "getFromInlineField": false,
@@ -16,5 +17,18 @@
   "enableQuickSwitcher": true,
   "enableSuggestor": true,
   "enableBases": true,
-  "selectors": []
+  "selectors": [
+    {
+      "type": "tag",
+      "name": "prototype",
+      "value": "prototype",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "0f61-401b",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    }
+  ]
 }

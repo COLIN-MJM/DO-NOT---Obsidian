@@ -1,5 +1,5 @@
 ---
-banner: "[[![[Pasted image 20261030145254.png]]]]"
+banner: "[[Pasted image 20261030145246.png]]"
 icon: 🏡
 ---
 ## Pitch (Toy)
@@ -15,6 +15,7 @@ ___
 - [[Game Design]]
 - [[Documentation Technique]]
 - [[Direction Artistique]]
+- [[Gestion de Projet]]
 
 ## Recherches
 ___
