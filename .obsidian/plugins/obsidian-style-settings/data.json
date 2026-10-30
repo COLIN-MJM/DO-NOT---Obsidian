@@ -13,5 +13,13 @@
   "supercharged-links@@791c-31d6-before": "❗ ",
   "supercharged-links@@99fe-34c7-color": "#CA26C1",
   "supercharged-links@@99fe-34c7-before": "💭 ",
-  "supercharged-links@@9280-70d0-before": "🔎 "
+  "supercharged-links@@9280-70d0-before": "🔎 ",
+  "supercharged-links@@2b89-f9fe-color": "#7188ED",
+  "supercharged-links@@2b89-f9fe-before": "🎨 ",
+  "supercharged-links@@4dd7-dbe0-before": "💻 ",
+  "supercharged-links@@4dd7-dbe0-color": "#78C664",
+  "supercharged-links@@6935-655c-color": "#FFFFFF",
+  "supercharged-links@@6935-655c-background-color": "#631F1F",
+  "supercharged-links@@c-6935-655c-use-background": true,
+  "supercharged-links@@6935-655c-before": "⚠️ "
 }

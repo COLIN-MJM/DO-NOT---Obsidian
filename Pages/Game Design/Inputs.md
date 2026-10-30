@@ -1,4 +1,4 @@
 ---
 tags:
-  - documentation
+  - gamedesign
 ---

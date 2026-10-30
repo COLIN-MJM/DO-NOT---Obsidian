@@ -2,7 +2,7 @@
 banner: "#fe9d169e"
 icon: 🎯
 tags:
-  - documentation
+  - gamedesign
 ---
 # Le jeu et la règle
 

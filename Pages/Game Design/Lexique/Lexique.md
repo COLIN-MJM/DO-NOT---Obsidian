@@ -1,6 +1,6 @@
 ---
 tags:
-  - documentation
+  - gamedesign
 ---
 ### Définitions globales
 ______________

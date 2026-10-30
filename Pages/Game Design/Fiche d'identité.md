@@ -1,6 +1,6 @@
 ---
 tags:
-  - documentation
+  - gamedesign
 ---
 # Pitch
 ---
