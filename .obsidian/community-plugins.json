@@ -1,5 +1,9 @@
 [
   "conflict-manager",
   "kanban-bases-view",
-  "direct-git-sync"
+  "direct-git-sync",
+  "homepage",
+  "obsidian-languagetool-plugin",
+  "notion-bases",
+  "obsidian-importer"
 ]
