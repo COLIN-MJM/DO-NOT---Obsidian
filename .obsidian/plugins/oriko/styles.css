@@ -1,0 +1,3782 @@
+/* Per-card values the renderer writes on the element that reads each one,
+   registered as not inherited. An unregistered custom property inherits, so
+   setting one on an element restyles everything inside it too; on a wall of
+   cards against Obsidian's stylesheet that turned a tile-size step into a
+   fifth of a second of restyling, and every hover into a frame or two.
+   Universal syntax keeps each var()'s fallback working where it is unset. */
+@property --pg-s {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --pg-rx {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --pg-ry {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --pg-h {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --pg-band-h {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --pg-steam-band {
+  syntax: "*";
+  inherits: false;
+}
+
+.oriko-view {
+  /* One floating surface, defined once. The selection toolbar is the
+     reference: every bar, menu and popup over the wall is the same material,
+     so they read as one system rather than four things that happen to be
+     dark. Change it here, not in the rules below. */
+  /* A panel sitting slightly above the wall, and not much more than that.
+     The specular rim and top sheen this replaced were the glossy part: they
+     read as varnish rather than as glass, and there is no version of that
+     which is subtle. Flat fill, one hairline, one soft shadow.
+     Tinted by the theme: the pane's own background lifted a touch toward its
+     text colour, so a blue or warm theme gets blue or warm glass instead of a
+     neutral grey slab. Text and washes come from that text colour too. */
+  --pg-ink: var(--text-normal);
+  --pg-glass-base: color-mix(in oklab, var(--background-primary) 93%, var(--pg-ink));
+  --pg-surface: color-mix(in oklab, var(--pg-glass-base) 84%, transparent);
+  --pg-surface-radius: 22px;
+  --pg-surface-pad: 10px;
+
+  /* Enough to separate the panel from a busy cover, no brightness pump. */
+  --pg-surface-blur: blur(24px) saturate(130%);
+
+  /* Barely there. The separation from the wall should come from the fill
+     being lighter than what is behind it, with the edge only just resolving
+     the boundary. At 0.075 it was drawing an outline, which puts the panel
+     in front of the wall rather than just above it. */
+  --pg-surface-ring: inset 0 0 0 1px color-mix(in srgb, var(--pg-ink) 7%, transparent);
+  /* Every value below is a role, not a colour, so the light theme can
+     restate the set without touching a single rule that uses them. The
+     alphas differ between themes on purpose: a wash that reads as a gentle
+     lift on a dark panel reads as a smudge on a light one. Quieter text is
+     the theme's text colour faded, not its own muted and faint colours: some
+     themes draw faint text barely off the background. */
+  --pg-surface-mid: color-mix(in srgb, var(--pg-ink) 76%, transparent);
+  --pg-surface-dim: color-mix(in srgb, var(--pg-ink) 52%, transparent);
+  --pg-surface-faint: color-mix(in srgb, var(--pg-ink) 42%, transparent);
+  --pg-inner-active: color-mix(in srgb, var(--pg-ink) 15%, transparent);
+  --pg-inner-press: color-mix(in srgb, var(--pg-ink) 24%, transparent);
+  --pg-inner-well: color-mix(in srgb, var(--pg-ink) 8%, transparent);
+  --pg-inner-chip: color-mix(in srgb, var(--pg-ink) 11%, transparent);
+  --pg-rule: color-mix(in srgb, var(--pg-ink) 13%, transparent);
+  --pg-scrim: rgba(0, 0, 0, 0.42);
+  --pg-peek-ring: rgba(255, 255, 255, 0.55);
+  --pg-stage-lift: 0 24px 70px rgba(0, 0, 0, 0.45);
+  /* Stronger than a label, which is what makes a matched run read as one. */
+  --pg-mark: #fff;
+  /* The plugin's own accent, not the vault's.
+     --color-accent is a user setting and can be any hue at any lightness, so
+     rules built on it have no contrast guarantee and occasionally land
+     somewhere ugly against a panel that is otherwise all greys. These two are
+     tuned per theme instead: lifted here so it reads against near-black,
+     deepened in light so it carries white. It stays chromatic because the
+     selection ring sits over arbitrary photographs, where white and black both
+     occur constantly and a neutral ring simply disappears. */
+  --pg-accent: #6ea8fe;
+  --pg-on-accent: #0b0d12;
+  /* Tile shadows are the thing that gives a light wall away fastest: an
+     alpha tuned against near-black is a bruise against white. */
+  --pg-tile-lift: 0 6px 18px rgba(0, 0, 0, 0.3);
+  /* The lift's own shape with no colour, worn at rest; see .pg-frame. */
+  --pg-tile-rest: 0 6px 18px rgba(0, 0, 0, 0);
+  --pg-tile-lift-selected: 0 8px 22px rgba(0, 0, 0, 0.38);
+  --pg-tile-lift-strong: 0 10px 26px rgba(0, 0, 0, 0.42);
+
+  /* Soft and close. A deep shadow ringed the panel in dark, which read as a
+     second outline underneath the first. */
+  --pg-surface-lift: 0 1px 6px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.16);
+
+  --pg-surface-text: var(--pg-ink);
+
+  /* Concentric: an inner corner should be the outer corner less the padding
+     between them, or the two curves fight each other at the corner. */
+  --pg-inner-radius: calc(var(--pg-surface-radius) - var(--pg-surface-pad));
+  --pg-inner-hover: color-mix(in srgb, var(--pg-ink) 10%, transparent);
+
+  position: relative;
+  height: 100%;
+  padding: 0;
+  /* clip, not hidden: hidden still leaves an element programmatically
+     scrollable, which is how focus, scrollIntoView and an overscrolling
+     child list kept dragging the whole stage around. clip makes it not a
+     scroll container at all, so the class of bug cannot recur. */
+  overflow: clip;
+  background: var(--background-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Obsidian carries the theme on the body, so the panels follow it with no
+   setting of ours and no flash on load. */
+.theme-light .oriko-view {
+  /* Light glass lifts toward white, the way paper catches light, still
+     carrying the theme's own tint. */
+  --pg-glass-base: color-mix(in oklab, var(--background-primary) 70%, #fff);
+  --pg-surface: color-mix(in oklab, var(--pg-glass-base) 86%, transparent);
+  --pg-surface-ring: inset 0 0 0 1px color-mix(in srgb, var(--pg-ink) 9%, transparent);
+  --pg-surface-lift: 0 1px 6px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(0, 0, 0, 0.09);
+  --pg-surface-mid: color-mix(in srgb, var(--pg-ink) 74%, transparent);
+  --pg-surface-dim: color-mix(in srgb, var(--pg-ink) 52%, transparent);
+  --pg-surface-faint: color-mix(in srgb, var(--pg-ink) 40%, transparent);
+  --pg-inner-hover: color-mix(in srgb, var(--pg-ink) 6%, transparent);
+  --pg-inner-active: color-mix(in srgb, var(--pg-ink) 9%, transparent);
+  --pg-inner-press: color-mix(in srgb, var(--pg-ink) 14%, transparent);
+  --pg-inner-well: color-mix(in srgb, var(--pg-ink) 5%, transparent);
+  --pg-inner-chip: color-mix(in srgb, var(--pg-ink) 7%, transparent);
+  --pg-rule: color-mix(in srgb, var(--pg-ink) 10%, transparent);
+  --pg-scrim: rgba(0, 0, 0, 0.25);
+  --pg-peek-ring: rgba(28, 28, 32, 0.6);
+  --pg-stage-lift: 0 20px 56px rgba(0, 0, 0, 0.18);
+  --pg-mark: rgba(10, 10, 12, 1);
+  --pg-accent: #2563c9;
+  --pg-on-accent: #ffffff;
+  --pg-tile-lift: 0 4px 14px rgba(0, 0, 0, 0.12);
+  --pg-tile-rest: 0 4px 14px rgba(0, 0, 0, 0);
+  --pg-tile-lift-selected: 0 6px 18px rgba(0, 0, 0, 0.16);
+  --pg-tile-lift-strong: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+.pg-viewport {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  contain: strict;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+/* Drop target: drawn on the view rather than inside the viewport, so it frames
+   the whole wall including its chrome, and as pseudo-elements so it costs no
+   DOM at all until a drag actually arrives.
+
+   The scrim and the label are separate because the label shimmers, and a
+   shimmer is a gradient clipped to the glyphs. Clip the scrim's own element
+   and the scrim would be clipped to the letters along with it.
+
+   pointer-events stay off throughout. An overlay that could be hit would take
+   the dragover events itself, and the drop would land on a target that had
+   just stopped being able to hear about it. */
+.oriko-view.is-drop-target::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 60;
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-scrim);
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  pointer-events: none;
+  animation: pg-drop-in 140ms ease both;
+}
+
+/* The label is set by the view, which knows where the drop will actually
+   land: nothing is filed into a smart grid, so one on screen sends the
+   clipping home, and that is better said by the frame before the drop than by
+   a toast after it. */
+.oriko-view.is-drop-target::after {
+  content: var(--pg-drop-label, "Drop to add");
+  position: absolute;
+  inset: 10px;
+  z-index: 62;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pg-surface-text);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  animation: pg-drop-in 140ms ease both;
+}
+
+/* A slow sweep from secondary to primary, lighting each letter as it reaches
+   it and letting it fall back behind.
+
+   Painted as a gradient clipped to the glyphs, so it is the letters that
+   change weight rather than a band drawn over them. The two colours are the
+   surface's own secondary and primary text, which is what makes it read as the
+   words waking up rather than as something coloured passing through: an accent
+   flare was tried first and looked like a effect, not like text.
+
+   Guarded, because the colour has to be transparent for the clip to show, and
+   text that cannot be clipped would then be text that cannot be read. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .oriko-view.is-drop-target::after {
+    /* The range has to be wide or there is nothing to see. Secondary to
+       primary is 0.72 alpha to 0.88, which spread across half the label is a
+       change no eye picks up; this runs from a little over half opacity to the
+       surface's fullest mark, and narrows the band so the lift arrives as a
+       glint rather than a wash. */
+    /* Two glints to a tile, not one.
+
+       Slower and more often pull against each other while there is a single
+       band: one cycle carries the tile exactly one width, so the only way to
+       raise the cadence is to shorten the cycle, which speeds the travel up.
+       A second band in the same tile breaks the tie. The cycle can then be
+       lengthened, which slows the sweep, while a glint arrives every half
+       cycle rather than every whole one. */
+    background-image: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 0%,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 17%,
+      var(--pg-mark) 25%,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 33%,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 67%,
+      var(--pg-mark) 75%,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 83%,
+      color-mix(in srgb, var(--pg-surface-text) 58%, transparent) 100%
+    );
+    /* Tiled, not no-repeat. Outside a no-repeat image there is nothing to clip
+       to, so the letters the sweep had left behind were painting as nothing at
+       all rather than as secondary text. Both ends of the gradient are the
+       same colour, so the tiling seam is invisible. */
+    background-size: 200% 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation:
+      pg-drop-in 140ms ease both,
+      pg-drop-shimmer 4800ms linear infinite;
+  }
+}
+
+/* Exactly one background width per cycle, so every pass is the same pass and
+   the loop has no step in it. Right to left in position terms is left to right
+   on screen: an image wider than its box moves the other way. */
+@keyframes pg-drop-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* The dashes, travelling slowly round the frame for as long as the file is
+   held over the wall. This is the state worth animating: the entrance is over
+   in a seventh of a second, and a drag sits here as long as it takes to aim.
+
+   Geometry in CSS rather than attributes, so the rect follows the frame at any
+   pane size without being measured. */
+.pg-drop-frame {
+  display: none;
+}
+
+/* Covers the whole view, with the frame's inset carried by the rect instead.
+
+   An svg is a replaced element: given inset alone and width auto it does not
+   stretch to the box, it falls back to its intrinsic 300x150 and draws itself
+   in the corner. Sizing it outright and insetting the geometry is what avoids
+   that entirely. */
+.oriko-view.is-drop-target .pg-drop-frame {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 61;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 11px, being the overlay's own 10px inset plus half the stroke, so the dashes
+   sit inside the frame the way a border would rather than straddling it.
+
+   The radius comes in by the same 1px. Two rounded corners inset differently
+   but given the same radius are not concentric: their curves diverge, the
+   stroke wanders off the scrim's corner, and what is behind the pane shows
+   through the gap between them. Only the corners were ever wrong, the
+   straights having nothing to be concentric about. */
+.oriko-view.is-drop-target .pg-drop-frame rect {
+  x: 11px;
+  y: 11px;
+  width: calc(100% - 22px);
+  height: calc(100% - 22px);
+  rx: calc(var(--pg-surface-radius) - 1px);
+  fill: none;
+  stroke: var(--pg-accent);
+  stroke-width: 2;
+  /* Both set by the view, which measures the perimeter and rounds the period
+     to divide it evenly. The fallbacks are only ever seen if that measurement
+     fails, and carry the seam it exists to remove. */
+  stroke-dasharray: 5 6;
+  animation: pg-drop-march 1100ms linear infinite;
+}
+
+/* Exactly one period per cycle, so the loop closes on itself. */
+@keyframes pg-drop-march {
+  to {
+    stroke-dashoffset: calc(var(--pg-drop-period, 11px) * -1);
+  }
+}
+
+@keyframes pg-drop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oriko-view.is-drop-target::before,
+  .oriko-view.is-drop-target::after,
+  .oriko-view.is-drop-target .pg-drop-frame rect {
+    animation: none;
+  }
+
+  /* Without the sweep the gradient parks mid-band, so the colour comes back
+     and the letters are simply the colour they always were. */
+  .oriko-view.is-drop-target::after {
+    background-image: none;
+    color: var(--pg-surface-text);
+  }
+}
+
+.pg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* Space is held: the wall is ready to be grabbed. */
+.pg-viewport.is-pannable,
+.pg-viewport.is-pannable .pg-tile {
+  cursor: grab;
+}
+
+.pg-viewport.is-panning,
+.pg-viewport.is-panning .pg-tile {
+  cursor: grabbing;
+}
+
+/* Dragging must not select text or start a native image drag. */
+.pg-viewport.is-pannable {
+  user-select: none;
+}
+
+.pg-viewport.is-pannable .pg-media {
+  pointer-events: none;
+}
+
+/* Layout box only. Transparent and unclipped: the visible card is the frame
+   inside it, which is what lets selection expand without overlapping.
+   Deliberately not paint-contained, which would clip the selection ring
+   and shadow to the tile box. */
+.pg-tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  contain: layout;
+  cursor: pointer;
+}
+
+.pg-frame {
+  position: absolute;
+  inset: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--background-secondary);
+  /* Perspective must lead the transform. The rotation vars are set by the
+     renderer from where the cursor sits on the card. */
+  transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg))
+    scale(1);
+  /* Flat, deliberately: the card tips as one surface, so nothing inside it
+     needs a 3D context of its own. preserve-3d here gave the picture, the
+     pills and the band a composited layer each on every card on the wall,
+     several hundred in all, which the compositor walked on every frame. */
+  /* An outline, not a border or inset shadow: outlines paint above the
+     element's descendants, so the ring is not hidden by the image filling
+     the card. A negative offset keeps it inside the card edge, so it never
+     spends the gap the selection just expanded into. */
+  /* Width and offset move together so the ring always occupies exactly the
+     innermost band of the card edge. It has to stay within SELECT_LIFT (4),
+     or a selected card's ring spills into the gap its own lift just opened. */
+  outline: 3px solid transparent;
+  outline-offset: -3px;
+  /* The hover lift's shadow, already in place and fully transparent, so
+     lifting a card only fades it in. Grown from none, the blur passed through
+     every radius on the way, and the GPU builds a shader for each blur width
+     the first time it draws one: a pause of a tenth of a second or more, the
+     first time each card was hovered. */
+  box-shadow: var(--pg-tile-rest);
+  /* Resting state, so this is the transition that runs on the way OUT.
+     Long and soft, so a card settles back to flat instead of snapping. */
+  transition:
+    transform 460ms cubic-bezier(0.19, 1, 0.28, 1),
+    outline-color 220ms ease,
+    box-shadow 320ms ease;
+}
+
+.pg-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.pg-media.is-loaded {
+  opacity: 1;
+}
+
+
+/* Hover reveals a handful of pills pinned to the corners, not a caption
+   band: the card stays a picture, and what the pills say is chosen in
+   Settings → Oriko → Show on tiles. Pointer events stay off so a pill can
+   never take a click meant for the card. */
+.pg-meta {
+  position: absolute;
+  inset: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  /* Hidden as well as transparent at rest, once the fade out has run. Each
+     pill blurs what is behind it, and a transparent pill still keeps its
+     own compositor layer for that, on every card; a hidden one keeps none. */
+  visibility: hidden;
+  transition:
+    opacity 120ms ease,
+    visibility 0s linear 120ms;
+  pointer-events: none;
+}
+
+/* Same reason as the tips: a tapped card would keep its hover state, and
+   the pills it reveals, long after the finger had gone. */
+@media (hover: hover) {
+  .pg-tile:hover .pg-meta {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 120ms ease,
+      visibility 0s;
+  }
+}
+
+/* At the tightest stage a column is narrower than a pill row needs, and
+   the stage exists to show more of the picture. The card stays a picture. */
+.pg-viewport.is-tiny .pg-meta {
+  display: none;
+}
+
+.pg-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 0;
+}
+
+/* Dates stack in the top-right corner, everything else in the bottom-left,
+   matching the way a feed labels a post. */
+.pg-badges-top {
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+/* One pill along the bottom, its values run together inside it. A pill
+   wider than the tile clips at its own edge and its text ticks, see below. */
+.pg-badges-bottom {
+  flex-wrap: nowrap;
+  align-self: flex-start;
+  max-width: 100%;
+  margin-top: auto;
+}
+
+.pg-ticker {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.pg-ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+/* The second copy only exists once the text is known to overflow; before
+   that the pill must size to the text alone. */
+.pg-ticker-copy {
+  display: none;
+  margin-left: 24px;
+}
+
+.pg-ticker.is-overflowing .pg-ticker-copy {
+  display: inline;
+}
+
+/* The ticker. armTicker measures one copy's width into --pg-ticker on the
+   way in, and the animation only runs while the card is hovered, so nothing
+   on the wall moves unbidden. Linear and one way, the way a ticker reads. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pg-tile:hover .pg-ticker.is-overflowing .pg-ticker-track {
+    animation: pg-ticker var(--pg-ticker-time, 4s) linear 500ms infinite;
+  }
+}
+
+@keyframes pg-ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(var(--pg-ticker, 0px), 0, 0);
+  }
+}
+
+.pg-badge {
+  display: inline-block;
+  flex: none;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(20, 20, 24, 0.62);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-media {
+  -webkit-user-drag: none;
+}
+
+/* A card for a clip still being made, held in one state until the
+   clipping's real look is ready. Until the link has been read it is a quiet
+   shimmer; from then on it shows the page's own picture, heavily blurred,
+   sharpening as the clip goes. A pill in the corner names the step. */
+.pg-frame.pg-building {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: var(--background-secondary);
+}
+
+.pg-building-art {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.pg-building-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(127, 127, 127, 0.09) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: pg-building-shimmer 1.6s ease-in-out infinite;
+  transition: opacity 400ms ease;
+}
+
+.pg-building.has-preview .pg-building-art::before {
+  opacity: 0;
+}
+
+@keyframes pg-building-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Scaled up a touch so the blur's soft edge falls outside the card. */
+.pg-building-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(var(--pg-blur, 22px)) saturate(0.75) brightness(0.82);
+  transition:
+    opacity 500ms ease,
+    filter 600ms ease;
+  -webkit-user-drag: none;
+}
+
+.pg-building.has-preview .pg-building-preview {
+  opacity: 1;
+}
+
+/* The step, in the tile pills' own material. */
+.pg-building-pill {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: calc(100% - 20px);
+  padding: 5px 10px 5px 7px;
+  border-radius: 999px;
+  background: rgba(20, 20, 24, 0.62);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.pg-building-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.pg-building-icon .svg-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.2;
+}
+
+/* The words shimmer while work goes on: a band of full white sweeps left to
+   right through slightly dimmed text. */
+.pg-building-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.5) 38%,
+    #fff 50%,
+    rgba(255, 255, 255, 0.5) 62%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: pg-building-text 1.8s linear infinite;
+}
+
+@keyframes pg-building-text {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+/* A store page's waiting card has the store card's band, empty for now. */
+.pg-building-band {
+  position: relative;
+  gap: 8px;
+}
+
+.pg-building-line {
+  width: 56%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(199, 213, 224, 0.12);
+}
+
+.pg-building-line.is-short {
+  width: 34%;
+}
+
+/* Landing: the old card lies over the new one, says Clipped with a check
+   that pops in and draws itself, then fades to show the clipping. */
+.pg-frame.pg-building.is-landing {
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.pg-frame.pg-building.is-landing.is-gone {
+  opacity: 0;
+}
+
+.pg-building.is-landing .pg-building-text {
+  animation: none;
+  background: none;
+  color: #fff;
+}
+
+.pg-building.is-landing .pg-building-icon {
+  animation: pg-building-pop 320ms cubic-bezier(0.22, 0.9, 0.28, 1.4);
+}
+
+.pg-building.is-landing .pg-building-icon .svg-icon path,
+.pg-building.is-landing .pg-building-icon .svg-icon polyline {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: pg-building-draw 420ms ease-out 80ms forwards;
+}
+
+@keyframes pg-building-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pg-building-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-building-art::before,
+  .pg-building.is-landing .pg-building-icon {
+    animation: none;
+  }
+
+  .pg-building-text {
+    animation: none;
+    background: none;
+    color: #fff;
+  }
+
+  .pg-building.is-landing .pg-building-icon .svg-icon path,
+  .pg-building.is-landing .pg-building-icon .svg-icon polyline {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* At the tightest stage a card is too narrow for words; the icon says enough. */
+.pg-viewport.is-tiny .pg-building-text {
+  display: none;
+}
+
+.pg-viewport.is-tiny .pg-building-pill {
+  left: 6px;
+  bottom: 6px;
+  padding: 4px;
+}
+
+/* Describe on the wall: the clip-in-progress card's pill, over a card that
+   keeps its own picture. Named steps only, each one the run really reaches. */
+.pg-describe {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.pg-describe.is-gone {
+  opacity: 0;
+}
+
+/* While Claude has the clip, a light crosses the card. */
+.pg-describe.is-sweeping::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: pg-building-shimmer 1.6s ease-in-out infinite;
+}
+
+.pg-describe:not(.is-busy) .pg-building-text {
+  animation: none;
+  background: none;
+  color: #fff;
+}
+
+.pg-describe.is-landed .pg-building-icon {
+  animation: pg-building-pop 320ms cubic-bezier(0.22, 0.9, 0.28, 1.4);
+}
+
+.pg-describe.is-landed[data-icon="check"] .pg-building-icon .svg-icon path,
+.pg-describe.is-landed[data-icon="check"] .pg-building-icon .svg-icon polyline {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: pg-building-draw 420ms ease-out 80ms forwards;
+}
+
+/* The labels a clip gained pop on one after another, above the pill. */
+.pg-describe-labels {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  left: 10px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 4px;
+}
+
+.pg-describe-labels .pg-badge {
+  animation: pg-building-pop 320ms cubic-bezier(0.22, 0.9, 0.28, 1.4) both;
+  animation-delay: calc(160ms + var(--pg-i, 0) * 70ms);
+}
+
+/* The card's own hover pills sit where these do. */
+.pg-tile.is-describing .pg-meta {
+  display: none;
+}
+
+/* While a run goes, the wall steps back and the clips with a step showing
+   stay lit: one layer the colour of the wall over the whole canvas, with
+   those clips raised above it. A single layer, because an opacity on every
+   other card gave each one holding a video its own offscreen pass a frame. */
+.pg-describe-scrim {
+  position: absolute;
+  z-index: 7;
+  background: var(--background-primary);
+  opacity: 0.65;
+  pointer-events: none;
+  will-change: opacity;
+  animation: pg-describe-scrim-in 520ms ease-in-out;
+  transition: opacity 520ms ease-in-out;
+}
+
+.pg-describe-scrim.is-gone {
+  opacity: 0;
+}
+
+@keyframes pg-describe-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Above the selection and hover lifts too, or a selected clip being
+   described would sit under the layer. */
+.pg-viewport.is-describe-run .pg-tile.is-describing,
+.pg-viewport.is-describe-run .pg-tile.is-building,
+.pg-viewport.is-describe-run .pg-tile.is-lighting,
+.pg-viewport.is-describe-run .pg-tile.is-unlit {
+  z-index: 8;
+}
+
+/* A clip comes up out of the dimmed wall, and goes back down into it, under
+   a veil of the layer's own colour and strength, so neither is a jump. */
+.pg-viewport.is-describe-run .pg-tile.is-lighting::after,
+.pg-viewport.is-describe-run .pg-tile.is-unlit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--background-primary);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.pg-viewport.is-describe-run .pg-tile.is-lighting::after {
+  animation: pg-describe-veil-up 420ms ease-in-out forwards;
+}
+
+.pg-viewport.is-describe-run .pg-tile.is-unlit::after {
+  animation: pg-describe-scrim-in 420ms ease-in-out;
+}
+
+@keyframes pg-describe-veil-up {
+  to {
+    opacity: 0;
+  }
+}
+
+/* A crowd of clips at once drops the blur and the shimmering words, which
+   each cost a repaint every frame under a scroll. */
+.pg-viewport.is-describing-many .pg-describe .pg-building-pill,
+.pg-viewport.is-describing-many .pg-describe .pg-badge {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(20, 20, 24, 0.8);
+}
+
+.pg-viewport.is-describing-many .pg-describe .pg-building-text {
+  animation: none;
+  background: none;
+  color: #fff;
+}
+
+.pg-viewport.is-tiny .pg-describe-labels {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-describe.is-sweeping::before,
+  .pg-describe.is-landed .pg-building-icon,
+  .pg-describe-labels .pg-badge,
+  .pg-describe-scrim {
+    animation: none;
+    transition: none;
+  }
+
+  .pg-viewport.is-describe-run .pg-tile.is-lighting::after,
+  .pg-viewport.is-describe-run .pg-tile.is-unlit::after {
+    display: none;
+  }
+
+  .pg-describe .pg-building-text {
+    animation: none;
+    background: none;
+    color: #fff;
+  }
+
+  .pg-describe.is-landed[data-icon="check"] .pg-building-icon .svg-icon path,
+  .pg-describe.is-landed[data-icon="check"] .pg-building-icon .svg-icon polyline {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.pg-marquee {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  display: none;
+  pointer-events: none;
+  border: 1px solid var(--pg-accent);
+  background: hsl(from var(--pg-accent) h s l / 0.12);
+  border-radius: 2px;
+}
+
+.pg-marquee.is-active {
+  display: block;
+}
+
+/* Selection expands the card into the inset it already reserves, so it can
+   never overlap a neighbour however tall the tile is. */
+.pg-tile.is-selected {
+  z-index: 5;
+}
+
+.pg-tile.is-selected .pg-frame {
+  transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg))
+    scale(var(--pg-s, 1));
+  outline-color: var(--pg-accent);
+  box-shadow: var(--pg-tile-lift-selected);
+}
+
+.pg-confirm-list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  max-height: 180px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.pg-confirm-more {
+  list-style: none;
+  margin-left: -12px;
+  opacity: 0.7;
+}
+
+/* The card currently open in the detail view. Hidden outright rather than
+   faded, so the returning flight lands on empty space instead of on a
+   duplicate of itself. */
+.pg-tile.is-focus-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Reflow: a tile that keeps its identity glides to its new spot. Applied
+   only to continuing tiles, never to a pooled element reused for another
+   clipping, which would otherwise fly across the canvas. */
+.pg-tile.is-gliding {
+  /* Opacity rides along: the spotlight dims tiles that are gliding to make
+     room for the new folder, and a transform-only list here snapped them. */
+  transition:
+    transform 300ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    opacity 520ms ease-in-out;
+}
+
+/* Arrival: overshoot past full size, dip, settle. The keyframes carry the
+   overshoot, so the easing between them stays a plain ease-out; a springy
+   curve here as well would compound into a second, unwanted bounce.
+
+   Every frame repeats the tilt transform rather than writing a bare scale().
+   transform is one property, so a keyframe setting scale() alone drops the
+   perspective and rotation, and a card entering under the cursor would snap
+   flat for the length of the animation. */
+.pg-tile.is-entering .pg-frame {
+  animation: pg-pop 460ms cubic-bezier(0.22, 0.9, 0.28, 1) both;
+  animation-delay: var(--pg-enter-delay, 0ms);
+}
+
+@keyframes pg-pop {
+  from {
+    opacity: 0;
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg)) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg)) scale(1.06);
+  }
+  80% {
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg)) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg)) scale(1);
+  }
+}
+
+/* Departure: tip away and shrink out while the survivors glide up behind it.
+   Starts from whatever tilt the card was holding, so deleting the card under
+   the cursor does not snap it flat before it goes. */
+.pg-tile.is-leaving {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pg-tile.is-leaving .pg-frame {
+  animation: pg-vanish 220ms cubic-bezier(0.55, 0, 0.85, 0.35) both;
+}
+
+@keyframes pg-vanish {
+  from {
+    opacity: 1;
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg)) scale(1) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(760px) rotateX(0deg) rotateY(0deg) scale(0.7) rotate(-3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-tile.is-gliding,
+  .pg-tile.is-entering .pg-frame,
+  .pg-tile.is-leaving .pg-frame,
+  .pg-media {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Hover lifts a card the same way selection does, minus the ring. Only one
+   element can be hovered, so moving quickly between tiles crossfades: the
+   one being left transitions back down as the new one comes up. */
+.pg-tile:hover {
+  z-index: 4;
+}
+
+/* The lift answers a cursor, and the tilt inside it is driven by where that
+   cursor is. A finger has neither, and a tapped card would keep the raised
+   shadow after the finger had gone, so on touch a card simply stays flat. */
+@media (hover: hover) {
+  .pg-tile:hover .pg-frame {
+    transform: perspective(760px) rotateX(var(--pg-rx, 0deg)) rotateY(var(--pg-ry, 0deg))
+      scale(var(--pg-s, 1));
+    box-shadow: var(--pg-tile-lift);
+    /* While engaged, short enough to follow the cursor. Leaving hover falls
+       back to the resting transition above, which is the gentle one. */
+    transition:
+      transform 120ms cubic-bezier(0.22, 0.9, 0.28, 1),
+      outline-color 190ms ease,
+      box-shadow 190ms ease;
+  }
+
+  /* Selection outranks hover, so a selected card keeps its ring and depth. */
+  .pg-tile.is-selected:hover .pg-frame {
+    box-shadow: var(--pg-tile-lift-strong);
+  }
+}
+
+/* Dragging should not leave a trail of tiles popping under the cursor. */
+.pg-viewport.is-panning .pg-tile:hover .pg-frame,
+.pg-viewport.is-selecting .pg-tile:hover .pg-frame {
+  transform: perspective(760px) scale(1);
+  box-shadow: var(--pg-tile-rest);
+}
+
+.pg-viewport.is-selecting .pg-tile.is-selected .pg-frame {
+  transform: perspective(760px) scale(var(--pg-s, 1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-tile:hover .pg-frame {
+    transform: none;
+  }
+}
+
+/* Archived clip standing in for the poster still inside a note. */
+.pg-note-video {
+  max-width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Floating actions for the current selection. Rides above the canvas and
+   rises into view only while something is selected. */
+.pg-actionbar {
+  position: absolute;
+  bottom: calc(22px + var(--pg-bottom-inset, 0px));
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  /* Parked below the edge and non-interactive until a selection exists. */
+  transform: translate(-50%, calc(100% + 30px));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 260ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    opacity 180ms ease;
+}
+
+.pg-actionbar.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pg-actionbar-count {
+  padding: 0 0 0 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pg-surface-mid);
+  white-space: nowrap;
+}
+
+/* Rules a bar into groups. One definition for both bars: they are the same
+   control in two places, and two rules meaning one thing is how they came to
+   differ by two pixels in the first place. */
+.pg-bar-divider {
+  width: 1px;
+  align-self: stretch;
+  margin: 3px 2px;
+  background: var(--pg-rule);
+}
+
+/* Selector carries the bar as well, so it outranks Obsidian's own button
+   styling, which otherwise paints a filled background at rest. */
+.pg-actionbar button.pg-actionbar-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pg-inner-radius);
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: var(--pg-surface-text);
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-actionbar button.pg-actionbar-button:focus,
+.pg-actionbar button.pg-actionbar-button:focus-visible {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.pg-actionbar button.pg-actionbar-button:hover {
+  background-color: var(--pg-inner-active);
+}
+
+.pg-actionbar button.pg-actionbar-button:active {
+  background-color: var(--pg-inner-press);
+  transform: scale(0.93);
+}
+
+/* Shared by the grid's selection bar and the detail view's action bar, so
+   the two cannot drift. The host button must be position: relative. */
+.pg-tip {
+  position: absolute;
+  /* Measured from the button, which sits inside the bar's padding, so the
+     offset has to clear that padding before any gap is visible. */
+  bottom: calc(100% + 21px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  /* Fully round rather than the surface radius: at this height the two are
+     the same shape anyway, and a label should read as a pill. */
+  border-radius: 999px;
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  color: var(--pg-surface-text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+/* Only where there is a pointer that can hover. A touch applies :hover on
+   tap and leaves it applied until something else is tapped, so on a phone
+   these labels would appear on use and then sit there, captioning a button
+   nobody is pointing at. */
+@media (hover: hover) {
+  .pg-actionbar-button:hover .pg-tip,
+  .pg-detail-button:hover .pg-tip,
+  .pg-detail-back:hover .pg-tip,
+  .pg-spacebar button:hover .pg-tip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* The wall's own controls stand alone rather than inside a bar, so there is
+   no padding to clear and the offset above would leave a visible gap between
+   the label and the button it belongs to. */
+.pg-spacebar .pg-tip {
+  bottom: calc(100% + 10px);
+}
+
+/* Read, never drawn. Carries a control's accessible name where an aria-label
+   would otherwise make Obsidian draw a second tooltip beside our own. */
+.pg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.pg-tip-key {
+  opacity: 0.55;
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-actionbar,
+  .pg-tip {
+    transition: none;
+  }
+}
+
+/* Right-click menu. The backdrop dims the wall so the choice is the only
+   thing in focus, and swallows the click that dismisses it. */
+.pg-menu-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: var(--pg-scrim);
+  opacity: 0;
+  /* Exit: quicker than the entry, so a dismissed menu is gone by the time you
+     have looked away, while arriving still has time to read as a movement. */
+  transition: opacity 100ms ease;
+}
+
+/* Inert while arriving and while leaving. A backdrop still fading would
+   otherwise swallow the click that opens whatever you turned to next. */
+.pg-menu-backdrop:not(.is-open) {
+  pointer-events: none;
+}
+
+.pg-menu-backdrop.is-open {
+  opacity: 1;
+  transition: opacity 140ms ease;
+}
+
+.pg-menu {
+  position: absolute;
+  z-index: 41;
+  min-width: 260px;
+  padding: var(--pg-surface-pad);
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  opacity: 0;
+  transform: scale(0.94);
+  /* Exit. Shorter than the entry and with no overshoot: a menu should spring
+     open and then simply be gone, not bounce on the way out. */
+  transition:
+    opacity 100ms ease,
+    transform 100ms ease;
+}
+
+/* Inert while arriving and while leaving, so a panel on its way out cannot
+   take a click meant for the wall or for the menu replacing it. */
+.pg-menu:not(.is-open) {
+  pointer-events: none;
+}
+
+.pg-menu.is-open {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 130ms ease,
+    transform 160ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 13px;
+  border-radius: var(--pg-inner-radius);
+  color: var(--pg-surface-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.pg-menu-item:hover {
+  background: var(--pg-inner-hover);
+}
+
+/* The keyboard's cursor in a submenu, lit exactly as hover lights a row: the
+   two are the same idea arriving by different means, and showing them
+   differently would suggest they do different things. */
+.pg-menu-item.is-active {
+  background: var(--pg-inner-hover);
+}
+
+/* The row stays lit while its submenu is open, so the choice keeps the
+   context it was made from. */
+.pg-menu-item.is-open-parent {
+  background: var(--pg-inner-hover);
+}
+
+.pg-menu-arrow {
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  color: var(--pg-surface-text);
+  opacity: 0.5;
+}
+
+.pg-menu-arrow .svg-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Above its parent, and never wider than it needs to be: a list of grid
+   names should not inherit the parent's min-width. */
+.pg-menu-sub {
+  z-index: 42;
+  min-width: 180px;
+  overscroll-behavior: contain;
+  /* A source or category list grows with the collection, so it scrolls
+     rather than running off the top of the pane. */
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Opened from the detail view's bar, which outranks a menu in the normal
+   stack, so the panel would otherwise be built behind the overlay and never
+   be seen. Scoped to that one caller rather than raising menus generally:
+   they sit below the palette on purpose, and a blanket raise would silently
+   invert that relationship too. */
+.pg-menu-backdrop.is-elevated {
+  z-index: 51;
+}
+
+.pg-menu.is-elevated {
+  z-index: 52;
+}
+
+.pg-menu.pg-menu-sub.is-elevated {
+  z-index: 53;
+}
+
+.pg-menu-item.is-destructive:hover {
+  background: rgba(255, 82, 82, 0.18);
+}
+
+.pg-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  opacity: 0.9;
+}
+
+.pg-menu-label {
+  flex: 1 1 auto;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.pg-menu-detail {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--pg-surface-dim);
+  white-space: nowrap;
+}
+
+/* Always present so a row can be patched in place, and out of the way until
+   it has something to say. */
+.pg-menu-detail:empty {
+  display: none;
+}
+
+/* A mark reads as state, not as a footnote, so it comes up to full strength
+   where the count it replaced was deliberately quiet. */
+.pg-menu-detail.is-marked {
+  display: flex;
+  align-items: center;
+  color: var(--pg-surface-text);
+}
+
+.pg-menu-detail.is-marked .svg-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* No row here has a left icon, so nothing reserves the gutter. Both forms:
+   the top panel carries the class itself, while a submenu carries it on the
+   element its rows live in, beneath the search field. */
+.pg-menu.is-iconless .pg-menu-icon,
+.pg-menu .is-iconless .pg-menu-icon {
+  display: none;
+}
+
+/* A sentence above a sheet's rows, for a choice that has to say what it will
+   do before it is made. Indented to the rows' text, not the panel's edge, so
+   it reads as belonging to the list rather than to the window. */
+.pg-sheet-note {
+  margin: 2px 0 10px;
+  padding: 0 13px;
+  color: var(--pg-surface-mid);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* The submenu's search field.
+
+   A real input rather than a div a key handler writes into. Every global
+   shortcut in the plugin steps aside for a focused field, so this is what
+   suspends the wall's keys while you type, and it is why the shortcuts that
+   belong to a field work here at all. */
+.pg-menu input.pg-menu-query {
+  /* Row metrics, so the text sits on the same left edge and at the same size
+     as the labels it is narrowing. At its own smaller size it read as a
+     caption about the list rather than as part of it. */
+  display: block;
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 10px 13px;
+  border: 0;
+  border-radius: var(--pg-inner-radius);
+  background-color: var(--pg-inner-well);
+  background-image: none;
+  box-shadow: none;
+  color: var(--pg-surface-text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.3;
+  height: auto;
+}
+
+/* Restates the well, and does not merely drop the border. This field is
+   focused the entire time it is visible, so a reset that skips the background
+   hands the host's focused-form-field wash a state the resting rule never
+   gets to answer, and the well silently becomes whatever the theme paints. */
+.pg-menu input.pg-menu-query:hover,
+.pg-menu input.pg-menu-query:active,
+.pg-menu input.pg-menu-query:focus,
+.pg-menu input.pg-menu-query:focus-visible {
+  border: 0;
+  background-color: var(--pg-inner-well);
+  background-image: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.pg-menu input.pg-menu-query::placeholder {
+  color: var(--pg-surface-faint);
+}
+
+/* Collapsed while empty, so a submenu you are only pointing at looks the way
+   it always did and the field appears as you use it. It stays in the document
+   and keeps its focus, which is the whole point: zero height, not hidden. */
+.pg-menu input.pg-menu-query.is-empty {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The .is-open rules carry their own transition and outrank a bare
+     .pg-menu here, so they have to be named or the entry animation survives
+     the preference that asked for it to stop. */
+  .pg-menu,
+  .pg-menu.is-open,
+  .pg-menu-backdrop,
+  .pg-menu-backdrop.is-open {
+    transition: none;
+  }
+}
+
+/* Detail view: a single clipping, flown out of the card that was clicked. */
+.pg-detail {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+}
+
+.pg-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--background-primary);
+  /* Opaque at rest. The fade in is animated from fly(), not declared here,
+     because the backdrop is created and given is-open inside one task; the
+     return is still a cut, since the card flying home needs the wall to land
+     on rather than a surface dissolving underneath it. */
+  opacity: 1;
+}
+
+.pg-detail:not(.is-open) .pg-detail-backdrop {
+  opacity: 0;
+}
+
+.pg-detail-stage {
+  position: absolute;
+  overflow: hidden;
+  /* The flight is transform-only, so this keeps it entirely on the
+     compositor instead of repainting the image each frame. */
+  will-change: transform;
+  border-radius: 6px;
+  /* No fill. The stage is sized to the media's own aspect, so any surface
+     showing through would be letterboxing rather than design. */
+  background: transparent;
+  box-shadow: var(--pg-stage-lift);
+}
+
+/* Carries the zoom transform. Kept off the stage on purpose: the stage's own
+   transform belongs to the flight animation, which fills forwards and would
+   override anything written to the stage inline. */
+.pg-detail-zoom {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.pg-detail.is-zoomable .pg-detail-stage {
+  cursor: zoom-in;
+}
+
+.pg-detail.is-zoomed .pg-detail-stage {
+  cursor: grab;
+}
+
+.pg-detail.is-panning .pg-detail-stage {
+  cursor: grabbing;
+}
+
+.pg-detail-media {
+  width: 100%;
+  height: 100%;
+  /* Contain, never cover: the stage is re-fitted to the media's true aspect
+     shortly after opening, but until then cover would crop the image. The
+     black bars came from a black fill behind this, not from contain. */
+  object-fit: contain;
+  display: block;
+  background: transparent;
+  /* Electron starts a native image drag otherwise, which swallows the pan. */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.pg-detail button.pg-detail-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  opacity: 0;
+  /* The leave, plus the shared button transitions repeated. `transition` is
+     one property, so a rule that touches it at all has to restate the legs it
+     is not changing or they are dropped. */
+  transition:
+    opacity 90ms ease,
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    box-shadow 180ms ease;
+}
+
+.pg-detail.is-open button.pg-detail-back {
+  opacity: 1;
+  /* Delays here are measured against FLIGHT_MS. The chrome layers in over the
+     last third of the flight and settles as the card lands, rather than
+     arriving while it is still travelling. Only the opacity leg differs from
+     the rule above; the rest repeat for the reason given there. */
+  transition:
+    opacity 320ms ease 250ms,
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    box-shadow 180ms ease;
+}
+
+/* The tip belongs under this one. Every other tip rises above its button,
+   which from the top left corner would place it off the top of the pane. */
+.pg-detail-back .pg-tip {
+  top: calc(100% + 14px);
+  bottom: auto;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+.pg-detail-meta {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  /* No top padding: the panel's own top edge is set to the image's in
+     paintMeta, so padding here would push the first field below it. Left
+     padding stays small for the same reason, the gap being positional. */
+  /* The bottom padding grows by whatever Obsidian's navbar covers, so the
+     last field can be scrolled clear of it rather than ending underneath. */
+  padding: 0 40px calc(40px + var(--pg-bottom-inset, 0px)) 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transform: translateX(10px);
+  /* Cut, not faded. The panel is text pinned to the right edge, so any
+     lingering makes it read as debris the returning card flies underneath. */
+  transition: none;
+}
+
+.pg-detail.is-open .pg-detail-meta {
+  opacity: 1;
+  transform: translateX(0);
+  /* No transition. The entrance is played by detail.ts, because this panel is
+     built and given is-open inside one task and a transition between the two
+     needs a style flush to land in between, which never happens. These two
+     rules are only the resting states: hidden before it opens, and shown
+     while it is open so a close cuts it rather than letting it linger as
+     debris the returning card flies underneath. */
+}
+
+/* Stacked (narrow pane): the details run under the picture, so they end
+   behind the action bar pinned to the bottom. Enough bottom padding that the
+   last field can scroll clear of it, and no right padding, since the column
+   is already as wide as the picture and nothing sits to its right. */
+.pg-detail.is-stacked .pg-detail-meta {
+  padding-right: 4px;
+  /* The inset is repeated rather than inherited: this longhand overrides the
+     padding shorthand above, so without it the last field goes back under
+     Obsidian's navbar and 0.1.7 is undone in the one layout that most needs
+     it. */
+  padding-bottom: calc(96px + var(--pg-bottom-inset, 0px));
+}
+
+/* Beside a picture the column shares the pane's bottom with the floating
+   action bar, so it ends above the bar instead of running underneath it:
+   content that overflows scrolls inside, and the last field or the palette
+   can never sit half-hidden behind the buttons. Stacked mode keeps its own
+   bottom padding, which serves the same purpose there. */
+.pg-detail:not(.is-stacked) .pg-detail-meta {
+  bottom: calc(92px + var(--pg-bottom-inset, 0px));
+  padding-bottom: 24px;
+}
+
+.pg-detail-field {
+  margin-bottom: 22px;
+}
+
+.pg-detail-label {
+  margin-bottom: 4px;
+  font-family: var(--font-monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-normal);
+}
+
+.pg-detail-value {
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* The source row's link out. Muted like its siblings until pointed at, so
+   the panel stays a description rather than a row of controls. */
+.pg-detail-link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.pg-detail-link:hover {
+  color: var(--text-normal);
+  text-decoration: underline;
+}
+
+/* The picture's palette, last in the details panel so it reads as another
+   field rather than a widget bolted on underneath. */
+.pg-swatches {
+  /* Nothing follows it, and the panel already pads its own bottom. */
+  margin-bottom: 0;
+}
+
+.pg-swatches-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.pg-detail button.pg-swatch {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  /* The colour itself is set inline; this only has to not fight it. */
+  background-image: none;
+  /* An inset ring, not a border. A near-black swatch needs an edge against a
+     dark panel and a near-white one against a light panel, and an inset ring
+     stays the swatch's own shape instead of growing it. */
+  box-shadow: inset 0 0 0 1px var(--pg-rule);
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-detail button.pg-swatch:hover {
+  transform: scale(1.12);
+}
+
+.pg-detail button.pg-swatch:active {
+  transform: scale(0.94);
+}
+
+/* One readout for the whole row rather than a tip on each swatch: the panel
+   scrolls, and a scroll container clips absolutely positioned children, which
+   would cut the tips off the swatches at either end of the row. It is always
+   in the document and only fades, so showing a value cannot reflow the panel. */
+.pg-swatches-readout {
+  width: fit-content;
+  margin: 10px auto 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  color: var(--pg-surface-text);
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  /* Centred by the auto margins, then carried sideways to sit under whichever
+     swatch is being pointed at, which swatch-strip.ts measures and clamps. One
+     label that travels rather than one per swatch: the panel scrolls, and a
+     scroll container clips absolutely positioned children, so a tip on each
+     would be cut off the first and the last. This one stays in the flow.
+
+     Both offsets ride in the single transform, since the second declaration of
+     a property replaces the first rather than adding to it, and the sideways
+     move has to survive the vertical one arriving. */
+  transform: translate(var(--pg-readout-x, 0px), -4px);
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.pg-swatches-readout.is-visible {
+  opacity: 1;
+  transform: translate(var(--pg-readout-x, 0px), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-detail button.pg-swatch,
+  .pg-swatches-readout {
+    transition: none;
+    animation: none;
+  }
+}
+
+.pg-detail-actions {
+  position: absolute;
+  bottom: calc(26px + var(--pg-bottom-inset, 0px));
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  transform: translate(-50%, 14px);
+  opacity: 0;
+  /* Exit: a quick drop away with no delay, short enough to be finished
+     while the card is still early in its return rather than trailing it. */
+  transition:
+    opacity 110ms ease,
+    transform 110ms ease;
+}
+
+.pg-detail.is-open .pg-detail-actions {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition:
+    opacity 320ms ease 320ms,
+    transform 360ms cubic-bezier(0.19, 1, 0.26, 1) 320ms;
+}
+
+.pg-detail button.pg-detail-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pg-inner-radius);
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: var(--pg-surface-text);
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-detail button.pg-detail-button:hover {
+  background-color: var(--pg-inner-hover);
+}
+
+.pg-detail button.pg-detail-button:active {
+  transform: scale(0.93);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-detail-backdrop,
+  .pg-detail-meta,
+  .pg-detail-actions,
+  .pg-detail.is-open .pg-detail-meta,
+  .pg-detail.is-open .pg-detail-actions,
+  /* Named with their element, to match the specificity of the rules that
+     set these transitions. A bare .pg-detail-back would lose to them and
+     the animation would survive the preference asking it to stop. */
+  .pg-detail button.pg-detail-back,
+  .pg-detail.is-open button.pg-detail-back {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Grids: the always-present controls, and the surfaces for managing them.
+   --------------------------------------------------------------------------- */
+
+/* A full-width row rather than two fixed corners, so the two ends stay put
+   whatever the pane is doing. The row itself is transparent to the pointer;
+   only the controls in it take clicks, or it would swallow the wall's bottom
+   edge and break marquee selection down there. */
+.pg-spacebar {
+  position: absolute;
+  right: 22px;
+  bottom: calc(22px + var(--pg-bottom-inset, 0px));
+  left: 22px;
+  z-index: 28;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  /* Leaves the same way the selection bar arrives, so the two read as one
+     exchange rather than two bars deciding independently. */
+  transition:
+    transform 260ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    opacity 180ms ease;
+}
+
+.pg-space-left,
+.pg-space-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pg-spacebar button,
+.pg-detail button.pg-detail-back,
+.oriko-view button.pg-folder-back {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  position: relative;
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  color: var(--pg-surface-text);
+  cursor: pointer;
+  /* Glass flexes under a finger rather than only changing colour. */
+  transition:
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    box-shadow 180ms ease;
+}
+
+.pg-spacebar button:hover,
+.pg-detail button.pg-detail-back:hover,
+.oriko-view button.pg-folder-back:hover {
+  background-color: var(--pg-surface);
+  box-shadow:
+    var(--pg-surface-ring),
+    var(--pg-surface-lift),
+    inset 0 0 0 999px var(--pg-inner-hover);
+}
+
+.pg-spacebar button:active,
+.pg-detail button.pg-detail-back:active,
+.oriko-view button.pg-folder-back:active {
+  transform: scale(0.96);
+}
+
+/* Sits apart from the two controls on the other side, but at full strength:
+   a permanent control that fades out at rest reads as one that has been
+   dismissed, and you cannot tell it is clickable without finding it first.
+
+   Selectors carry the bar and the element, as the detail bar's do: a theme
+   that styles every button (Primary sets button:not(.clickable-icon) to its
+   own radius) outranks a bare class, and the pills went square under it. */
+.pg-spacebar button.pg-space-manage,
+.pg-spacebar button.pg-space-filter,
+.pg-detail button.pg-detail-back {
+  width: 48px;
+  height: 38px;
+  border-radius: 19px;
+}
+
+/* Lit while filtering, because a filtered wall and an empty grid look
+   identical from the outside otherwise. */
+.pg-space-filter.is-active {
+  color: var(--pg-accent);
+}
+
+.pg-space-count {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  min-width: 15px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: var(--pg-accent);
+  color: var(--pg-on-accent);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 15px;
+  text-align: center;
+}
+
+.pg-space-count:empty {
+  display: none;
+}
+
+.pg-spacebar button.pg-space-switch {
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 19px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* A Describe run: a ring filling as clips land, then the closing line. */
+.pg-spacebar button.pg-space-describe {
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px 0 10px;
+  border-radius: 19px;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  animation: pg-building-pop 260ms cubic-bezier(0.22, 0.9, 0.28, 1.2);
+  transition: opacity 260ms ease;
+}
+
+.pg-spacebar button.pg-space-describe.is-hidden {
+  display: none;
+}
+
+.pg-spacebar button.pg-space-describe.is-leaving {
+  opacity: 0;
+}
+
+/* Turning while the run goes, since a batch of ten lands all at once and the
+   ring would otherwise sit still for the length of a call. */
+.pg-describe-ring {
+  flex: none;
+  transform: rotate(-90deg);
+  animation: pg-describe-turn 2.4s linear infinite;
+}
+
+@keyframes pg-describe-turn {
+  to {
+    transform: rotate(270deg);
+  }
+}
+
+.pg-describe-track,
+.pg-describe-fill {
+  fill: none;
+  stroke-width: 2.4;
+}
+
+.pg-describe-track {
+  stroke: color-mix(in srgb, var(--pg-surface-text) 22%, transparent);
+}
+
+.pg-describe-fill {
+  stroke: var(--pg-accent);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 400ms ease;
+}
+
+.pg-describe-done {
+  display: none;
+  color: var(--pg-accent);
+}
+
+.pg-describe-done .svg-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.4;
+}
+
+.pg-space-describe.is-finished .pg-describe-ring {
+  display: none;
+}
+
+.pg-space-describe.is-finished .pg-describe-done {
+  display: grid;
+  place-items: center;
+  animation: pg-building-pop 320ms cubic-bezier(0.22, 0.9, 0.28, 1.4);
+}
+
+.pg-space-describe.is-finished .pg-describe-done .svg-icon path,
+.pg-space-describe.is-finished .pg-describe-done .svg-icon polyline {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: pg-building-draw 420ms ease-out 80ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-spacebar button.pg-space-describe,
+  .pg-describe-ring,
+  .pg-space-describe.is-finished .pg-describe-done {
+    animation: none;
+  }
+
+  .pg-space-describe.is-finished .pg-describe-done .svg-icon path,
+  .pg-space-describe.is-finished .pg-describe-done .svg-icon polyline {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.pg-space-icon,
+.pg-space-chevron {
+  display: flex;
+  align-items: center;
+}
+
+.pg-space-icon .svg-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.pg-space-chevron .svg-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.55;
+}
+
+.pg-space-label {
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pg-spacebar button.pg-space-create {
+  width: 56px;
+  height: 38px;
+  border-radius: 19px;
+}
+
+.pg-space-create .svg-icon {
+  width: 19px;
+  height: 19px;
+}
+
+/* Menu additions: a rule for grouping, and a row that is shown but inert. */
+/* A tertiary caption over a group of menu rows.
+
+   Same treatment as the palette's section headings, because they are the same
+   thing on a different surface, and left aligned to the rows' text rather than
+   the panel's edge so it reads as belonging to the list under it. */
+.pg-menu-section {
+  padding: 8px 13px 4px;
+  color: var(--pg-surface-faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pg-menu-divider {
+  height: 1px;
+  margin: 5px 10px;
+  background: var(--pg-rule);
+}
+
+.pg-menu-item.is-disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pg-menu-item.is-disabled:hover {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-spacebar button,
+  .pg-actionbar button.pg-actionbar-button,
+  .pg-detail button.pg-detail-button {
+    transition: none;
+  }
+
+  /* Back shares the wall chrome's rules, so it shares their exemption. */
+
+  /* The flex is motion, not decoration, so it goes entirely. */
+  .pg-spacebar button:active,
+  .pg-actionbar button.pg-actionbar-button:active,
+  .pg-detail button.pg-detail-button:active,
+  .pg-detail button.pg-detail-back:active {
+    transform: none;
+  }
+}
+
+/* Centred search: one input over the wall that finds both the clippings on
+   it and the things you can do to them. Same surface, same rows and the same
+   inner radius as the menus, so it reads as the menu system opened from the
+   keyboard rather than a second design. */
+.pg-palette-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 44;
+  background: var(--pg-scrim);
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.pg-palette-backdrop.is-open {
+  opacity: 1;
+}
+
+.pg-palette {
+  position: absolute;
+  z-index: 45;
+  /* High enough that the list grows downward into open space, low enough
+     that the wall behind it still reads as the thing being searched. */
+  top: 14vh;
+  left: 50%;
+  width: min(620px, calc(100% - 32px));
+  max-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--pg-surface-pad);
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  opacity: 0;
+  /* The translate has to survive the entry transform, or the panel walks
+     half its own width across the screen as it opens. */
+  transform: translateX(-50%) scale(0.96);
+  transition:
+    opacity 130ms ease,
+    transform 160ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-palette.is-open {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.pg-palette-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 13px 12px;
+  border-bottom: 1px solid var(--pg-rule);
+}
+
+.pg-palette-search {
+  display: flex;
+  align-items: center;
+  color: var(--pg-surface-text);
+  opacity: 0.45;
+}
+
+.pg-palette-search .svg-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* The command you are answering, kept in view while you answer it. */
+.pg-palette-chip {
+  display: none;
+  flex: 0 0 auto;
+  padding: 3px 9px;
+  border-radius: 8px;
+  background: var(--pg-inner-chip);
+  color: var(--pg-surface-text);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.pg-palette-chip.is-visible {
+  display: block;
+}
+
+/* Room for the clip panel: the palette moves right of centre and the panel
+   takes the space to its left, so the pair sits centred together. */
+.pg-palette.has-clip-panel {
+  width: var(--pg-pair-palette, 620px);
+  left: calc(50% + (var(--pg-pair-panel, 400px) + 14px) / 2);
+}
+
+/* The clip a stage is about: its media playing, its title and labels. */
+.pg-clip-panel {
+  position: absolute;
+  z-index: 45;
+  top: 14vh;
+  left: calc(50% - (var(--pg-pair-panel, 400px) + 14px + var(--pg-pair-palette, 620px)) / 2);
+  width: var(--pg-pair-panel, 400px);
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--pg-surface-pad);
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+}
+
+.pg-clip-panel.is-visible {
+  display: flex;
+}
+
+.pg-clip-panel-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #000;
+}
+
+.pg-clip-panel-media video,
+.pg-clip-panel-media img {
+  display: block;
+  width: 100%;
+  max-height: 52vh;
+  object-fit: contain;
+}
+
+.pg-clip-panel-media .is-hidden {
+  display: none;
+}
+
+.pg-clip-panel-empty {
+  padding: 48px 16px;
+  color: var(--pg-surface-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+.pg-clip-panel-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 12px;
+}
+
+.pg-clip-panel-badge.is-empty {
+  display: none;
+}
+
+.pg-clip-panel-step {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  border-radius: 16px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pg-clip-panel.can-step .pg-clip-panel-step {
+  display: flex;
+}
+
+.pg-clip-panel-step.is-prev {
+  left: 8px;
+}
+
+.pg-clip-panel-step.is-next {
+  right: 8px;
+}
+
+.pg-clip-panel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 2px 6px 4px;
+}
+
+.pg-clip-panel-title {
+  overflow: hidden;
+  color: var(--pg-surface-text);
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pg-clip-panel-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pg-clip-panel-pill {
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--pg-inner-chip);
+  color: var(--pg-surface-text);
+  font-size: 12px;
+}
+
+.pg-clip-panel-pill.is-adding {
+  background: color-mix(in srgb, var(--pg-accent) 28%, transparent);
+}
+
+/* Selector carries the view as well as the panel, so it outranks Obsidian's
+   own input styling, which otherwise paints a filled box with its own border. */
+.oriko-view .pg-palette input.pg-palette-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--pg-surface-text);
+  /* 16px: anything smaller is what makes a mobile browser zoom on focus. */
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Every state, not just the resting one.
+   The field is focused for its whole life here, since the panel focuses it on
+   open and exists to be typed into, so a resting-state-only reset is a reset
+   that never actually applies. Listing the states is what stops the host's
+   focused-form-field wash painting the box back in behind the text, which is
+   the filled rectangle this file has now been written twice to prevent.
+   background-image as well as the colour: the host states one and some themes
+   state the other, and clearing one alone leaves the other showing. */
+.oriko-view .pg-palette input.pg-palette-input,
+.oriko-view .pg-palette input.pg-palette-input:hover,
+.oriko-view .pg-palette input.pg-palette-input:active,
+.oriko-view .pg-palette input.pg-palette-input:focus,
+.oriko-view .pg-palette input.pg-palette-input:focus-visible {
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.pg-palette input.pg-palette-input::placeholder {
+  color: var(--pg-surface-faint);
+}
+
+.pg-palette-list {
+  flex: 1 1 auto;
+  /* Positioned, so a row's offsetTop is measured against the list itself. */
+  position: relative;
+  overflow-y: auto;
+  /* Or a wheel past the last row keeps going into the pane behind it. */
+  overscroll-behavior: contain;
+  /* Both ends, and they have to match. The bottom was missing, so rows sat
+     against the footer's rule while clearing the head's, which reads as the
+     list having slipped down. A long list hides it by scrolling; a list of one
+     row is nothing but the gap, which is where it was finally seen. */
+  padding-block: 8px;
+  /* Keeps the row that scrollIntoView lands on clear of the rounded corner. */
+  scroll-padding: 8px 0;
+}
+
+.pg-palette-section {
+  padding: 8px 13px 4px;
+  color: var(--pg-surface-faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pg-palette-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 13px;
+  border-radius: var(--pg-inner-radius);
+  color: var(--pg-surface-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* The handle at the end of a row that can be carried up and down the list.
+
+   The grab cursor lives here and not on the row, because the row has two
+   things it can do and only one of them is a drag: the body opens it, this
+   moves it. A whole row that says grab is promising the wrong one, and was
+   also taking the pointer capture that stopped the row being clicked. */
+.pg-palette-grip {
+  display: flex;
+  align-items: center;
+  margin-left: 2px;
+  color: var(--pg-surface-faint);
+  cursor: grab;
+  /* Or a touch drag scrolls the list underneath the row instead of moving it.
+     Confined to the handle, so the rest of the row still scrolls by touch. */
+  touch-action: none;
+}
+
+.pg-palette-item:hover .pg-palette-grip,
+.pg-palette-item.is-active .pg-palette-grip {
+  color: var(--pg-surface-mid);
+}
+
+.pg-palette-item.is-dragging .pg-palette-grip {
+  cursor: grabbing;
+}
+
+/* Lifted while it is being carried. No transform: the row is genuinely
+   changing places as the pointer crosses each neighbour, so anything that
+   displaced it as well would be showing the move twice. */
+.pg-palette-list .pg-palette-item.is-dragging {
+  cursor: grabbing;
+  background: var(--pg-inner-active);
+  box-shadow: var(--pg-tile-lift);
+}
+
+/* One highlight, driven by the keyboard. Hover moves it rather than adding a
+   second lit row, so the thing Enter will run is never in doubt. */
+.pg-palette-item.is-active {
+  background: var(--pg-inner-hover);
+}
+
+.pg-palette-item.is-destructive.is-active {
+  background: rgba(255, 82, 82, 0.18);
+}
+
+.pg-palette-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  opacity: 0.9;
+}
+
+.pg-palette-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  /* Clipping titles are page titles: long, and they must not push the grid
+     name and shortcut hint off the row. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-palette-mark {
+  color: var(--pg-mark);
+  font-weight: 600;
+}
+
+.pg-palette-detail {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--pg-surface-dim);
+  white-space: nowrap;
+}
+
+.pg-palette-detail:empty {
+  display: none;
+}
+
+/* A mark reads as state, not as a footnote, so it comes up to full strength
+   where the count it replaced was deliberately quiet. */
+.pg-palette-detail.is-marked {
+  display: flex;
+  align-items: center;
+  color: var(--pg-surface-text);
+}
+
+.pg-palette-detail.is-marked .svg-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* No row in this list has a left icon, so nothing reserves the gutter. */
+.pg-palette-list.is-iconless .pg-palette-icon {
+  display: none;
+}
+
+/* A colour row's dot, in the icon's place in both the menus and the palette.
+   The colour comes in as --pg-dot on the dot itself, so painting a list of
+   them restyles nothing else. The inset ring is the detail view's swatch
+   edge: black needs one on a dark surface, white on a light one. */
+.pg-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--pg-dot, transparent);
+  box-shadow: inset 0 0 0 1px var(--pg-rule);
+}
+
+.pg-palette-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--pg-surface-text);
+  opacity: 0.5;
+}
+
+.pg-palette-arrow .svg-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.pg-palette-empty {
+  padding: 26px 13px 30px;
+  color: var(--pg-surface-dim);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Swatches: one value being picked, drawn as a wrapped grid of round buttons
+   rather than a column of rows. Twelve icons as twelve full-width rows was a
+   scrolling list for a choice of one, and gave the chosen icon nowhere to
+   show itself. The column count is the layout's own business: the keyboard
+   steps one swatch in reading order regardless, so nothing outside this rule
+   needs to agree with it. */
+.pg-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 8px 13px 12px;
+  justify-items: center;
+}
+
+/* A group caption inside the swatch grid takes the whole row. */
+.pg-swatch-grid .pg-palette-section {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+  padding: 10px 0 0;
+}
+
+.pg-swatch-grid .pg-palette-section:first-child {
+  padding-top: 0;
+}
+
+.pg-swatch-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background-color: var(--pg-inner-well);
+  box-shadow: inset 0 0 0 1px var(--pg-rule);
+  color: var(--pg-surface-mid);
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.pg-swatch-option .svg-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Pointer feedback only, deliberately weaker than the chosen state and
+   deliberately CSS. A swatch is a value that has to survive the pointer
+   leaving on its way back to the field, so hover must not be able to move
+   what will be saved; only a click or an arrow key does that. */
+.pg-swatch-option:hover {
+  background-color: var(--pg-inner-active);
+  color: var(--pg-surface-text);
+}
+
+.pg-swatch-option:active {
+  transform: scale(0.93);
+}
+
+/* An icon id setIcon did not recognise. Drawn as a plain hole rather than left
+   looking like a sparse glyph, so a name that has been renamed upstream is
+   obvious on sight instead of passing for a design choice. */
+.pg-swatch-option.is-missing {
+  border: 1px dashed var(--pg-rule);
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+/* Chosen: filled and knocked out, not merely tinted. Anything subtler reads
+   as another hover, which is the whole reason the old list had no sense of a
+   selection.
+
+   Neutral rather than accent. The accent appears on this surface as a ring, a
+   text colour or a tint at 12%, never as a field of colour, and a 44px disc of
+   it shouted over a panel that is otherwise entirely greys. --pg-mark is the
+   emphasis neutral this file already defines and already inverts per theme:
+   white on dark, near-black on light. */
+.pg-swatch-option.is-active {
+  background-color: var(--pg-mark);
+  box-shadow: none;
+  color: var(--background-primary);
+}
+
+.pg-swatch-option.is-active:hover {
+  background-color: var(--pg-mark);
+  color: var(--background-primary);
+}
+
+.pg-palette-foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 9px 13px 3px;
+  border-top: 1px solid var(--pg-rule);
+  color: var(--pg-surface-faint);
+  font-size: 11.5px;
+}
+
+/* Pushed to the far end, so the hints keep reading as a row of keys and the
+   commit is plainly the one thing you press. Selector carries the panel, for
+   the same reason every other control here does: Obsidian styles buttons. */
+.pg-palette .pg-palette-foot button.pg-sheet-cta {
+  margin-left: auto;
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 7px;
+  background-color: var(--pg-mark);
+  background-image: none;
+  box-shadow: none;
+  color: var(--background-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: filter 120ms ease;
+}
+
+.pg-palette .pg-palette-foot button.pg-sheet-cta:hover {
+  filter: brightness(1.08);
+}
+
+.pg-palette .pg-palette-foot button.pg-sheet-cta:active {
+  filter: brightness(0.94);
+}
+
+.pg-palette-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pg-palette-key {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--pg-inner-well);
+  color: var(--pg-surface-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-palette,
+  .pg-palette-backdrop {
+    transition: none;
+  }
+}
+
+/* A clipping is a picture, so the palette shows the picture rather than a
+   generic file icon. Same gutter either way, so nothing shifts. */
+.pg-palette-icon.is-thumb {
+  width: 26px;
+  height: 26px;
+  margin: -3px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--pg-inner-well);
+}
+
+.pg-palette-icon.is-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------------------------------------------------------------------------
+   Settings tab: the filter-property chips.
+
+   These live in Obsidian's own settings pane, outside .oriko-view, so the
+   plugin's surface tokens are out of scope here and would resolve to nothing.
+   Obsidian's variables instead, which is also what keeps the section looking
+   like the rest of the settings rather than like the wall.
+--------------------------------------------------------------------------- */
+
+/* A NEW tag on a section heading, for what a recent release brought. Drawn
+   from the class alone, so taking it off is one line in settings-tab.ts. */
+.pg-settings-new .setting-item-heading .setting-item-name::after {
+  content: "NEW";
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 6px;
+  border-radius: var(--radius-s);
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+.pg-props {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 18px;
+}
+
+.pg-prop {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 10px;
+  border-radius: 999px;
+  background-color: var(--background-modifier-hover);
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+}
+
+.pg-prop button.pg-prop-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pg-prop button.pg-prop-remove:hover {
+  background-color: var(--pg-rule);
+  color: var(--text-normal);
+}
+
+.pg-props-empty {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+/* Touch scrolls the wall with the browser's own scroller.
+
+   The momentum and the rubber-banding at the edges are WebKit's, written by
+   the people who decided what those should feel like and running off the
+   main thread. Reimplementing them in JavaScript means guessing constants
+   and arriving somewhere worse, so the viewport becomes a real scroll box
+   and pg-scroll is the spacer, sized to the scaled wall, that gives it
+   something to travel over.
+
+   Desktop keeps the transform camera above: it has a wheel, a held space
+   and a marquee, and a scroll box would improve none of them. */
+.pg-viewport.is-native-scroll {
+  overflow: auto;
+  /* Names the pans the browser may take for itself. Pinch is deliberately
+     absent, so a two-finger gesture reaches the pointer handlers as a zoom
+     instead of being swallowed as a page zoom. */
+  touch-action: pan-x pan-y;
+}
+
+/* Centres a wall narrower than the viewport, which is what clampCamera does
+   for the transform camera. */
+.pg-viewport.is-native-scroll .pg-scroll {
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Obsidian's mobile navbar is laid over the view rather than above it, so
+   every bar that floats at the bottom clears whatever of our bottom edge it
+   covers. The figure is measured in view.ts, because Obsidian publishes no
+   height for it, and is simply absent on desktop. */
+
+/* Two fingers zoom the picture, so the browser must not read the gesture as
+   a page zoom. The detail view is an overlay rather than a scroller, so it
+   wants none of the browser's panning either. */
+.pg-detail-stage {
+  touch-action: none;
+}
+
+/* For the length of a pinch the wall comes off the scroller and onto the
+   camera, so it is exactly what it is on desktop and what the detail view is
+   always: one transform, clamped as it goes. The scroller cannot represent
+   every position a transform can show, and handing between the two at the
+   end is what used to snap. */
+.pg-viewport.is-pinching {
+  overflow: hidden;
+}
+
+/* One bar at a time across a phone.
+
+   The selection bar is centred and the space bar runs the full width beneath
+   it, which on a desktop pane leaves room either side of centre and at 390px
+   does not: the selection bar lands on the grid switcher. So the wall's own
+   controls give up the bottom while a selection is up, which is also how
+   Photos and Files put it, and suits a mode a long press enters and a tap on
+   empty space leaves. Set from view.ts, and only on mobile. */
+.pg-spacebar.is-hidden {
+  transform: translateY(calc(100% + 30px));
+  opacity: 0;
+}
+
+/* The row is transparent to the pointer and its buttons take that back, so
+   stopping the row is not enough to stop them. */
+.pg-spacebar.is-hidden button {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-spacebar {
+    transition: none;
+  }
+}
+
+/* The hidden webview the Threads video sniffer loads a post in. Rendered
+   at phone-ish size but parked far off screen: display:none would stop the
+   player from ever mounting, and an unmounted player fetches nothing. */
+.pg-sniff-frame {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 420px;
+  height: 760px;
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile: the wall's controls gather into one centered surface, the shape
+   the detail view's action bar already has. Two clusters pinned to opposite
+   corners read as scattered buttons on a phone; one pill reads as a bar.
+   --------------------------------------------------------------------------- */
+
+body.is-mobile .pg-spacebar {
+  right: auto;
+  left: 50%;
+  justify-content: center;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  padding: 7px 10px;
+  border-radius: var(--pg-surface-radius);
+  background-color: var(--pg-surface);
+  background-image: none;
+  backdrop-filter: var(--pg-surface-blur);
+  -webkit-backdrop-filter: var(--pg-surface-blur);
+  box-shadow: var(--pg-surface-ring), var(--pg-surface-lift);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+/* The hidden slide keeps the centring it now needs to preserve. */
+body.is-mobile .pg-spacebar.is-hidden {
+  transform: translate(-50%, calc(100% + 30px));
+}
+
+body.is-mobile .pg-space-left,
+body.is-mobile .pg-space-right {
+  gap: 4px;
+}
+
+/* One rule where the clusters meet, as the detail bar draws between groups. */
+body.is-mobile .pg-space-right::before {
+  content: "";
+  width: 1px;
+  align-self: stretch;
+  margin: 3px 4px;
+  background: var(--pg-rule);
+}
+
+/* Inside one surface the buttons go flat, like the detail bar's: the glass
+   belongs to the bar now, not to each control. */
+body.is-mobile .pg-spacebar button {
+  border-radius: var(--pg-inner-radius);
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+body.is-mobile .pg-spacebar button:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+body.is-mobile .pg-spacebar button:active {
+  background-color: var(--pg-inner-hover);
+  transform: scale(0.93);
+}
+
+/* The filter-properties section is one declarative render row; the default
+   two-column setting layout would squeeze it, so it flows as a block. */
+.pg-props-setting {
+  display: block;
+}
+
+/* ---- Folders ------------------------------------------------------------
+
+   A folder is a card on the wall like any other, so it takes the tile's
+   inset, radius, lift and pop. Inside it is a collage of its members' covers,
+   with the name and count as the same pills a tile shows on hover, and four
+   corner brackets that drag it to one, two or every column. The brackets
+   show on hover where there is a hover, and after a long press where there
+   is not. */
+
+.pg-folder {
+  background: var(--background-secondary);
+  cursor: pointer;
+}
+
+/* Clipped here as well as by the frame: the frame keeps a 3D transform for
+   the tilt, and Chromium lets descendants of a preserve-3d element escape
+   its overflow, which left the covers' corners square outside the card. */
+.pg-folder-collage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* The wall's own spacing: the 6px layout gap plus the 4px inset either
+     card keeps, so the covers sit apart the way tiles do. */
+  gap: 14px;
+  padding: 14px;
+  overflow: hidden;
+  border-radius: inherit;
+  /* Two rows at every width; the columns grow with the card. Each cover
+     carries a span from collagePlan, and dense flow packs them so the card
+     is full whatever the count. */
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: dense;
+}
+
+.pg-folder-tile[data-width="2"] .pg-folder-collage {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pg-folder-tile[data-width="3"] .pg-folder-collage {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.pg-folder-cover[data-span="1x1"] { grid-column: span 1; grid-row: span 1; }
+.pg-folder-cover[data-span="2x1"] { grid-column: span 2; grid-row: span 1; }
+.pg-folder-cover[data-span="3x1"] { grid-column: span 3; grid-row: span 1; }
+.pg-folder-cover[data-span="2x2"] { grid-column: span 2; grid-row: span 2; }
+.pg-folder-cover[data-span="3x2"] { grid-column: span 3; grid-row: span 2; }
+.pg-folder-cover[data-span="4x2"] { grid-column: span 4; grid-row: span 2; }
+.pg-folder-cover[data-span="6x2"] { grid-column: span 6; grid-row: span 2; }
+
+.pg-folder-cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--background-modifier-hover);
+}
+
+.pg-folder-cover img,
+.pg-folder-cover video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* As for a tile's media: holding and moving pans the wall or drags a
+     handle, and must never pick the picture up. */
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pg-folder-cover.is-broken img {
+  visibility: hidden;
+}
+
+/* An empty folder shows its own icon, large and quiet, where covers would be. */
+.pg-folder-empty {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+}
+
+.pg-folder-empty .svg-icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* The tile's own hover band, always on: a folder's name is what it is for. */
+.pg-folder-head {
+  position: absolute;
+  inset: 0;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.pg-folder-name,
+.pg-folder-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(20, 20, 24, 0.62);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pg-folder-name {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.pg-folder-name span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-folder-icon {
+  display: flex;
+  flex: none;
+}
+
+.pg-folder-icon .svg-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Corner brackets: two edges of a square, curved at the card's own radius so
+   they read as the card's corners lifting. Hidden until asked for. */
+.pg-folder-handle {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0;
+  transition: opacity 140ms ease;
+  touch-action: none;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pg-folder-handle::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 3px solid #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.pg-folder-handle.is-tl { top: 0; left: 0; cursor: nwse-resize; }
+.pg-folder-handle.is-tr { top: 0; right: 0; cursor: nesw-resize; }
+.pg-folder-handle.is-bl { bottom: 0; left: 0; cursor: nesw-resize; }
+.pg-folder-handle.is-br { bottom: 0; right: 0; cursor: nwse-resize; }
+
+/* Each bracket sits on the card's edge and curves with its 10px radius. */
+.pg-folder-handle.is-tl::before { top: 0; left: 0; border-right: 0; border-bottom: 0; border-top-left-radius: 10px; }
+.pg-folder-handle.is-tr::before { top: 0; right: 0; border-left: 0; border-bottom: 0; border-top-right-radius: 10px; }
+.pg-folder-handle.is-bl::before { bottom: 0; left: 0; border-right: 0; border-top: 0; border-bottom-left-radius: 10px; }
+.pg-folder-handle.is-br::before { bottom: 0; right: 0; border-left: 0; border-top: 0; border-bottom-right-radius: 10px; }
+
+@media (hover: hover) {
+  .pg-folder-tile:hover .pg-folder-handle {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.pg-folder-tile.is-handles .pg-folder-handle,
+.pg-folder-tile.is-resizing .pg-folder-handle {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Held, the card reads as selected: the same accent ring, and the brackets
+   take the accent too. */
+.pg-folder-tile.is-handles .pg-frame,
+.pg-folder-tile.is-resizing .pg-frame {
+  outline-color: var(--pg-accent);
+  box-shadow: var(--pg-tile-lift-selected);
+}
+
+.pg-folder-tile.is-handles .pg-folder-handle::before,
+.pg-folder-tile.is-resizing .pg-folder-handle::before {
+  border-color: var(--pg-accent);
+}
+
+/* While a corner is held the card should not tilt under it. */
+.pg-folder-tile.is-resizing .pg-frame {
+  transform: perspective(760px) scale(1);
+}
+
+/* A folder just made pops in alone while everything else steps back. The
+   dimming is on the tile, so a card that keeps its transition eases back up
+   as one with the rest of the wall. */
+.pg-tile {
+  transition: opacity 520ms ease-in-out;
+}
+
+.pg-viewport.is-spotlight .pg-tile:not(.is-spotlit) {
+  opacity: 0.18;
+}
+
+.pg-tile.is-spotlit {
+  z-index: 6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-viewport.is-spotlight .pg-tile:not(.is-spotlit) {
+    opacity: 1;
+  }
+}
+
+/* The way back out of a folder: the detail view's back button, in its
+   corner, shown while a folder is open. Its selectors join the detail
+   view's below so it takes every rule that one takes, tip included. */
+.oriko-view button.pg-folder-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 28;
+  width: 48px;
+  height: 38px;
+  border-radius: 19px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 90ms ease,
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    box-shadow 180ms ease;
+}
+
+.oriko-view button.pg-folder-back.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    opacity 220ms ease 120ms,
+    background-color 120ms ease,
+    transform 180ms cubic-bezier(0.22, 0.9, 0.28, 1),
+    box-shadow 180ms ease;
+}
+
+/* ---- Steam: store page clippings drawn as store cards ------------------ */
+
+/* The store's own palette, in both themes: a store card is meant to read as
+   Steam at a glance, the way the store's own capsules do. Named once here so
+   the card and the detail view's store panel cannot drift apart. */
+.oriko-view {
+  --pg-steam-navy: #1b2838;
+  --pg-steam-ink: #c7d5e0;
+  --pg-steam-dim: #8f98a0;
+  --pg-steam-blue: #67c1f5;
+  --pg-steam-chip: rgba(103, 193, 245, 0.16);
+  --pg-steam-green: #beee11;
+  --pg-steam-green-box: #4c6b22;
+  --pg-steam-price-box: #344654;
+  --pg-steam-struck: #738895;
+}
+
+/* The art on top, the band under it. Stretched rather than centred, which is
+   what .pg-frame does for a lone picture. */
+.pg-frame.pg-steam {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: var(--pg-steam-navy);
+}
+
+/* The selection ring is the frame's outline, which a box paints before its
+   positioned children. The art is positioned, for the pills over it, so at
+   z-index auto it covered the ring and a selected card showed it only round
+   its band. Below the frame's own content it sits under the ring like a plain
+   tile's picture does. Isolated, so the card stays its own stacking context
+   when a hover drops the transform (Reduce Motion), or the art would sink
+   beneath the card's background. */
+.pg-frame.pg-steam,
+.pg-frame.pg-postcard {
+  isolation: isolate;
+}
+
+.pg-steam-art {
+  position: relative;
+  z-index: -1;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.pg-steam-band {
+  flex: 0 0 var(--pg-steam-band, 0px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 0 10px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #16202d 0%, var(--pg-steam-navy) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: var(--pg-steam-ink);
+}
+
+/* At the tightest stage the card is its art, like any tile. The layout
+   reserves no room for the band there either; see steamBandHeight. */
+.pg-viewport.is-tiny .pg-steam-band {
+  display: none;
+}
+
+.pg-steam-name {
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pg-steam-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* One row tall, wrapping: a tag that does not fit drops onto a second row
+   that is clipped away, so it disappears whole instead of being cut off
+   mid-word. Only a first tag too wide for the row on its own is truncated. */
+.pg-steam-tags {
+  --pg-steam-tag-line: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  height: calc(var(--pg-steam-tag-line) + 4px);
+  overflow: hidden;
+}
+
+.pg-steam-tag {
+  flex: none;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: var(--pg-steam-chip);
+  color: var(--pg-steam-blue);
+  font-size: 10px;
+  line-height: var(--pg-steam-tag-line);
+  white-space: nowrap;
+}
+
+.pg-steam-tag:first-child {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pg-steam-price {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  margin-left: auto;
+  border-radius: 2px;
+  overflow: hidden;
+  font-size: 11.5px;
+  line-height: 1.15;
+}
+
+.pg-steam-discount {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  background: var(--pg-steam-green-box);
+  color: var(--pg-steam-green);
+  font-weight: 700;
+}
+
+.pg-steam-amounts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--pg-steam-ink);
+}
+
+.pg-steam-price.is-discounted .pg-steam-amounts {
+  background: var(--pg-steam-price-box);
+  color: var(--pg-steam-green);
+}
+
+.pg-steam-original {
+  color: var(--pg-steam-struck);
+  font-size: 0.82em;
+  text-decoration: line-through;
+}
+
+.pg-steam-price.is-upcoming .pg-steam-amounts {
+  color: var(--pg-steam-blue);
+}
+
+/* The band's text grows a little with the band. */
+.pg-viewport.is-roomy .pg-steam-name {
+  font-size: 14px;
+}
+
+.pg-viewport.is-roomy .pg-steam-price {
+  font-size: 13px;
+}
+
+.pg-viewport.is-roomy .pg-steam-tags {
+  --pg-steam-tag-line: 14px;
+}
+
+.pg-viewport.is-roomy .pg-steam-tag {
+  font-size: 11px;
+}
+
+/* The store page in the detail view's panel. Oriko's own labels and rows
+   carry the facts; only the price corner and the genre chips wear the
+   store's colours, so the panel still reads as this plugin's. */
+/* In the panel's own type, the monospace every other field is set in: the
+   store lends the section its colours, never its typography. */
+.pg-steam-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-family: var(--font-monospace);
+}
+
+.pg-steam-heading {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-normal);
+}
+
+.pg-steam-blurb {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.pg-steam-head .pg-steam-price {
+  margin-left: 0;
+  font-size: 12px;
+}
+
+.pg-steam-head .pg-steam-discount {
+  padding: 0 9px;
+  font-size: 12px;
+}
+
+.pg-steam-head .pg-steam-amounts {
+  padding: 5px 9px;
+  background: var(--pg-steam-navy);
+}
+
+.pg-steam-head .pg-steam-price.is-discounted .pg-steam-amounts {
+  background: var(--pg-steam-price-box);
+}
+
+.pg-steam-head .pg-steam-tags {
+  --pg-steam-tag-line: 15px;
+  height: auto;
+  overflow: visible;
+}
+
+.pg-steam-head .pg-steam-tag {
+  padding: 3px 8px;
+  font-size: 10.5px;
+}
+
+/* Trailer and screenshots, two to a row at the panel's width. */
+.pg-steam-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.oriko-view button.pg-steam-shot {
+  position: relative;
+  height: auto;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: none;
+  border-radius: 4px;
+  background: var(--pg-steam-navy);
+  box-shadow: none;
+  cursor: pointer;
+  opacity: 0.62;
+  transition: opacity 120ms ease;
+}
+
+.oriko-view button.pg-steam-shot:hover,
+.oriko-view button.pg-steam-shot.is-active {
+  opacity: 1;
+}
+
+.oriko-view button.pg-steam-shot.is-active {
+  outline: 2px solid var(--pg-steam-blue);
+  outline-offset: -2px;
+}
+
+.pg-steam-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pg-steam-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.6));
+}
+
+.pg-steam-play .svg-icon {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+/* ---- Posts: X, Instagram, Threads and YouTube, picture over the author ---- */
+
+.pg-frame.pg-postcard {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.pg-post-band {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px 11px 11px;
+  background: var(--background-secondary);
+  box-shadow: inset 0 1px 0 var(--pg-rule);
+  color: var(--text-normal);
+}
+
+.pg-post-who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 22px;
+}
+
+.pg-post-avatar {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--background-modifier-border);
+}
+
+.pg-post-initial {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.pg-post-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.pg-post-avatar img.is-loaded {
+  opacity: 1;
+}
+
+.pg-post-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pg-post-badge {
+  display: grid;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.pg-post-badge .svg-icon {
+  width: 14px;
+  height: 14px;
+  stroke: #fff;
+  stroke-width: 2.4;
+}
+
+.pg-post-badge .svg-icon > :first-child {
+  fill: #1d9bf0;
+  stroke: #1d9bf0;
+  stroke-width: 1;
+}
+
+.pg-post-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.pg-post-heart {
+  display: grid;
+}
+
+.pg-post-heart .svg-icon {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2;
+}
+
+.pg-post-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--pg-post-lines, 2);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  font-size: 12.5px;
+  line-height: 17px;
+  color: var(--text-muted);
+}
+
+/* ---- Site cards shown on hover ------------------------------------------ */
+
+/* The card keeps its picture at full size and grows downward to show the
+   band under it while hovered, like a drawer sliding out, over whatever tile
+   sits below. The wall makes no room for it. The picture is held at the
+   tile's own height (--pg-h, set on the art) so the band waits below it,
+   clipped by the card's edge, until the card grows to show it. */
+.pg-frame.is-hover-band .pg-steam-art {
+  flex: none;
+  height: calc(var(--pg-h, 100%) - 8px);
+}
+
+.pg-frame.is-hover-band .pg-card-band {
+  flex: none;
+}
+
+.pg-frame.is-hover-band .pg-steam-band {
+  height: 56px;
+}
+
+/* The resting legs restated, since transition is one property, plus the
+   grow. */
+.pg-frame.is-hover-band {
+  transition:
+    transform 460ms cubic-bezier(0.19, 1, 0.28, 1),
+    outline-color 220ms ease,
+    box-shadow 320ms ease,
+    bottom 260ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+@media (hover: hover) {
+  .pg-tile:hover .pg-frame.is-hover-band {
+    bottom: calc(4px - var(--pg-band-h, 0px));
+    transition:
+      transform 120ms cubic-bezier(0.22, 0.9, 0.28, 1),
+      outline-color 190ms ease,
+      box-shadow 190ms ease,
+      bottom 260ms cubic-bezier(0.22, 0.9, 0.28, 1);
+  }
+}
+
+/* Cards below an opened one slide down to make room, and back. */
+.pg-tile.is-pushed,
+.pg-folder-tile.is-pushed {
+  transition: transform 260ms cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+/* Panning or marquee-selecting across the wall should not open drawers. */
+.pg-viewport.is-panning .pg-tile:hover .pg-frame.is-hover-band,
+.pg-viewport.is-selecting .pg-tile:hover .pg-frame.is-hover-band {
+  bottom: 4px;
+}
+
+/* At the tightest stage a card is its art, like any tile. */
+.pg-viewport.is-tiny .pg-card-band {
+  display: none;
+}
+
+.pg-viewport.is-tiny .pg-tile:hover .pg-frame.is-hover-band {
+  bottom: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-frame.is-hover-band,
+  .pg-tile:hover .pg-frame.is-hover-band,
+  .pg-tile.is-pushed,
+  .pg-folder-tile.is-pushed {
+    transition: none;
+  }
+}
