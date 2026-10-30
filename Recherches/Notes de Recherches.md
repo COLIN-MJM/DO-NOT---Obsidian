@@ -1,13 +1,17 @@
 ### Global
 ___
+- [[Projet - Recherches]]
+### Game Design
+___
+- [[Bart - Recherches]]
+- [[Ambre - Recherches]]
 
+### Game Art
+___
+- [[Ethan - Recherches]]
+- [[Emma - Recherches]]
 
-
-- Bart
-- Ambre
-
-- Ethan
-- Emma
-
-- Matthieu
-- Esteban
+### Programmation
+___
+- [[Matthieu - Recherches]]
+- [[Esteban - Recherches]]
