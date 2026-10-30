@@ -1,26 +1,26 @@
 ### Définitions globales
 ______________
-#### <span style="color:#623a2d">Token</span>
+#### <span style="color:#f76707">Token</span>
 
 > [!info]
 > - Un Token est la plus petite brique de construction d’une phrase logique.
-> - Une suite valide de Token est une [règle](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21).
-> - En fonction de son type, il peut servir à identifier une [Identity](https://app.notion.com/p/3f862d77a12d8028a85bc0703dc32b22?pvs=21), une [Ability](https://app.notion.com/p/3f862d77a12d8004b619f0b8f2939294?pvs=21) ou peut servir d’élément logique d’assignation via les [Verbs](https://app.notion.com/p/3f862d77a12d80acb64ad4c1a0034d0b?pvs=21).
+> - Une suite valide de Token est une règle.
+> - En fonction de son type, il peut servir à identifier une [[Identity]], une [[Ability]] ou peut servir d’élément logique d’assignation via les [[Verbs]].
 
-Il existe 4 types de tokens :
-- [[Identity]]
-- [[Ability]]
-- [[Verbs]]
-- [[Autre]]
+> Il existe 4 types de tokens :
+> - [[Identity]]
+> - [[Ability]]
+> - [[Verbs]]
+> - [[Autre]]
 #### <span style="color:#1c7ed6">Règle</span>
 
 > [!info]
 > - Une règle est une suite logique de Tokens, qui agit en temps réel sur le monde.
 > - Dans le setting initial du monde, une série de règles est déjà mise en place.
-> - Le joueur a accès en temps réel cette série de [règles](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21), et peut venir y déplacer les [Tokens](https://app.notion.com/p/Dictionnaire-3f862d77a12d80b99a46f3ddf4a51b51?pvs=21) de façon à modifier le comportement du monde.
+> - Le joueur a accès en temps réel cette série de règles, et peut venir y déplacer les Tokens de façon à modifier le comportement du monde.
 > - Chaque règle est contrainte par des limites syntaxiques.
 
-#### <span style="color:#b58900">Limites syntaxique</span>
+#### <span style="color:#ffa200">Limites syntaxique</span>
 
 > [!info]
 > 
