@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a991c8154a1d6fdd",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -23,24 +23,6 @@
               "icon": "lucide-file",
               "title": "Accueil - Donut_Reboot"
             }
-<<<<<<< Updated upstream
-=======
-          },
-          {
-            "id": "3e5b482c6ba642cd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Pages_V2/Recherches/Notes de Recherches.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Notes de Recherches"
-            }
->>>>>>> Stashed changes
           }
         ]
       }
@@ -48,15 +30,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "a3f08099dfbb35e7",
+    "id": "a5e478bb3639fe48",
     "type": "split",
     "children": [
       {
-        "id": "75b099f5121a551f",
+        "id": "773b9c51f1339caf",
         "type": "tabs",
         "children": [
           {
-            "id": "99c837bf8104b9f5",
+            "id": "733e82e69e509acf",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -71,7 +53,7 @@
             }
           },
           {
-            "id": "0403795344613e2d",
+            "id": "280b7ea2a4d8209a",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -88,7 +70,7 @@
             }
           },
           {
-            "id": "32a7f74387a338d9",
+            "id": "4726344afcbf784c",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -104,23 +86,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "77e256808997b107",
+    "id": "5adc534d6c313526",
     "type": "split",
     "children": [
       {
-        "id": "c3bf807a5dd158ca",
+        "id": "9f86856f869ce539",
         "type": "tabs",
         "children": [
           {
-            "id": "1a23fc77598f0349",
+            "id": "186134da2bb0ce77",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Accueil - Donut.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,12 +115,11 @@
             }
           },
           {
-            "id": "e55f9d5287ffd213",
+            "id": "67150b59624e23e4",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Accueil - Donut.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -148,7 +128,7 @@
             }
           },
           {
-            "id": "8a680318d662b241",
+            "id": "4322ee26997fd74f",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -163,7 +143,7 @@
             }
           },
           {
-            "id": "ae2960bfe71fe696",
+            "id": "0b3cc858d8f4b9b1",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -177,12 +157,11 @@
             }
           },
           {
-            "id": "764a01f5055e81c1",
+            "id": "e039b77099dc9f13",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Accueil - Donut.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,34 +169,23 @@
               "icon": "lucide-list",
               "title": "Plan"
             }
-          },
-          {
-            "id": "8cda4fd2f8cc371d",
-            "type": "leaf",
-            "state": {
-              "type": "conflict-manager-hub",
-              "state": {},
-              "icon": "git-compare",
-              "title": "Conflict hub"
-            }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 300,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
-      "canvas:Créer un nouveau canvas": false,
-      "workspaces:Gérer les dispositions des espaces de travail": false,
       "switcher:Ouvrir le sélecteur rapide": false,
       "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer un nouveau canvas": false,
       "daily-notes:Ouvrir la note quotidienne": false,
       "templates:Insérer le modèle": false,
       "command-palette:Ouvrir la palette de commandes": false,
+      "workspaces:Gérer les dispositions des espaces de travail": false,
       "bases:Créer une nouvelle base": false,
       "conflict-manager:Conflict hub": false,
       "direct-git-sync:Sync with GitHub": false,
@@ -227,88 +195,6 @@
       "task-center:Open Task Center": false
     }
   },
-<<<<<<< Updated upstream
-  "active": "e7a7b303c61786dc",
-  "lastOpenFiles": [
-    "Accueil - Donut (remote conflict - 2026-10-30).md",
-    "Accueil - Donut.md",
-    "Pages/Game Design/Game Design.md",
-    "Sans titre.canvas",
-    "Pages/Gestion de Projet/Gestion de Projet.md",
-    "Clippings/download.md",
-=======
-  "active": "a991c8154a1d6fdd",
-  "lastOpenFiles": [
-    "Pages_V2/Recherches/Notes de Recherches.md",
-    "Pages_V2/Recherches/Projet - Recherches.md",
-    "Pages_V2/Recherches/Références.md",
-    "Accueil - Donut_Reboot.md",
-    "Pages_V2/Gestion de Projet/Gestion de Projet.md",
-    "Images/Pasted image 20261030143614.png",
-    "Pages_V2/Direction Artistique/Direction Artistique.md",
-    "Pages_V2/Game Design/Game Design.md",
-    "NEPASUTILISER",
-    "Pages_V2/Game Design/Boucle OCR.md",
-    "Pages_V2/Game Design/Game System.md",
-    "Pages_V2/Game Design/Tendance système.md",
-    "Pages_V2/Game Design/Signes et Feedbacks.md",
-    "Pages_V2/Game Design/One Pager.md",
-    "Pages_V2/Game Design/Inputs.md",
-    "Pages_V2/Game Design/Gameloop de Guardiola.md",
-    "Pages_V2/Game Design/Forces et faiblesses.md",
-    "Pages_V2/Game Design/Fiche d'identité.md",
-    "Pages_V2/Game Design/Lexique/Lexique.md",
-    "Pages_V2/Prototypes/Prototype v1.md",
-    "Pages_V2/Prototypes/Prototype v2.md",
-    "Pages_V2/Game Design/Diagramme de Ventrice.md",
-    "Pages_V2/Game Design/3Cs.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Documentation Technique/Documentation Technique.md",
-    "Pages_V2/Documentation Technique/Documentation Technique.md",
-    "NEPASUTILISER/OLD_RulesDonut/Accueil - Donut.md",
-    "Pages_V2/Game Design/Lexique/Tokens/Verbs/Verbs.md",
-    "Pages_V2/Game Design/Lexique/Tokens/Identity/Identity.md",
-    "Pages_V2/Game Design/Lexique/Tokens/Verbs",
-    "Pages_V2/Game Design/Lexique/Tokens/Identity",
-    "Pages_V2/Game Design/Lexique/Tokens/Ability",
-    "Pages_V2/Game Design/Lexique/Tokens",
-    "Pages_V2/Recherches/Recherches_Individuelles",
-    "Pages_V2/Game Design/Lexique",
-    "Pages_V2/Gestion de Projet",
-    "Pages_V2/Recherches",
-    "Pages_V2/Prototypes",
-    "Sans titre.canvas",
->>>>>>> Stashed changes
-    "Attachments/Clippings/pasted-2026-10-30 163541.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 163544.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 163542.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 163541-2.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 161109.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 161107.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 161106.jpg",
-    "Attachments/Clippings/pasted-2026-10-30 161105.png",
-    "Attachments/Clippings/pasted-2026-10-30 161103.jpg",
-<<<<<<< Updated upstream
-    "TaskNotes/Views/calendar-default.base",
-    "TaskNotes/Start Here.md",
-    "TaskNotes/Views/agenda-default.base",
-    "TaskNotes/Views/kanban-default.base",
-    "TaskNotes/Views/mini-calendar-default.base",
-    "Pages/Recherches/Notes de Recherches.md",
-    "Pages/Recherches/Références.md",
-    "Pages/Direction Artistique/Direction Artistique.md",
-    "Pages/Documentation Technique/Documentation Technique.md",
-    "Pages/Game Design/Inputs.md",
-    "Pages/Game Design/Signes et Feedbacks.md",
-    "Pages/Game Design/One Pager.md",
-    "Pages/Game Design/Lexique/Lexique.md",
-    "Pages/Game Design/Game System.md",
-    "Pages/Game Design/Fiche d'identité.md",
-    "Pages/Game Design/Forces et faiblesses.md",
-    "Pages/Game Design/Diagramme de Ventrice.md",
-    "Pages/Game Design/3Cs.md",
-    "Images/Pasted image 20261030145251.png",
-=======
->>>>>>> Stashed changes
-    "Sans titre 1.canvas"
-  ]
+  "active": "733e82e69e509acf",
+  "lastOpenFiles": []
 }
