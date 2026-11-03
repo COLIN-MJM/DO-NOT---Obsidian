@@ -10,7 +10,7 @@ TBD
 
 ## Approche actuelle
 ___
-On a reboot ptdr.
+Voir [[Mortem - Reboot]].
 
 ## Documentation
 ___
