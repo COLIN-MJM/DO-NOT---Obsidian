@@ -39,8 +39,7 @@
               "title": "OriginSpawner"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -211,11 +210,17 @@
       "task-center:Open Task Center": false
     }
   },
-  "active": "232fd6df81dcccfa",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Pages_V2/Game Design/Lexique/OriginSpawner.md",
+    "Pages_V2/Recherches/Notes de Recherches.md",
+    "Pages_V2/Gestion de Projet/Gestion de Projet.md",
+    "Pages_V2/Recherches/Références.md",
+    "Pages_V2/Direction Artistique/Direction Artistique.md",
+    "Pages_V2/Documentation Technique/Documentation Technique.md",
+    "Accueil - Donut_Reboot.md",
     "Pages_V2/Game Design/Outils/Game System.md",
     "Pages_V2/Game Design/Game Design.md",
-    "Accueil - Donut_Reboot.md",
     "Pages_V2/Game Design/Outils/Joueur - 3Cs.md",
     "Pages_V2/Game Design/Outils/Inputs.md",
     "Pages_V2/Game Design/Outils/Signes et Feedbacks.md",
@@ -234,7 +239,6 @@
     "BartNotes/Variation pour le prototype sphérique.md",
     "BartNotes",
     "Pages_V2/Game Design/Lexique/Projectiles.md",
-    "Pages_V2/Game Design/Lexique/OriginSpawner.md",
     "Pages_V2/Game Design/Lexique/Sphère.md",
     "Images/Pasted image 20261103115050.png",
     "Images/Pasted image 20261103115408.png",
@@ -245,11 +249,6 @@
     "Images/Pasted image 20261103115004.png",
     "Pages_V2/Game Design/Lexique/Types de Projectiles",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Direction Artistique/Direction Artistique.md",
-    "NEPASUTILISER/OLD_RulesDonut/(OLD) Accueil - Donut.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Ability/Ability.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Identity/Identity.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Verbs/Verbs.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Tendance système.md",
     "Pages_V2/Game Design/Lexique",
     "Pages_V2/Game Design/Sans titre.base"
   ]

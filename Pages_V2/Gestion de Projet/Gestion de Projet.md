@@ -1,6 +1,7 @@
 ---
 tags:
   - gestiondeprojet
+  - wip
 icon: 🗓️
 ---
 
