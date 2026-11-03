@@ -1,12 +1,12 @@
-- Utiliser une trainé laissée par le le projectile incarné pour rediriger les projectiles présents sur le terrain ;
-- Les projectiles explosent redirigeant les projectiles existant dans un certain radius ;
-- Un proto avec plusieurs “planètes” → dézoomer très loin d’une planète avec la molette, cliquer sur une autre planète l’a fait passer en focus ;
-- Un prototype où il y a des portails entre ces planètes et en traverser téléporte le projectile sur l’autre planète.
-- Le projectile que tu contrôles tir régulièrement un petit projectile en face de lui, avec plusieurs propriétés activable/désactivable dans l’éditeur :
-- Détruit les autres projectiles qu’il rencontre ;
-    - Durée de vie limité (paramétrable) ;
-    - Peut détruire le projectile incarné s’il le rerencontrent ;
-- Mettre pause à tout les projectiles, cliquer individuellement sur un projectile te permettrait de désactiver la pause pour celui-ci ;
-- Un bouton qui apparait aléatoirement sur le planète, si un projectile rentre en collision avec, le bouton disparait et apparait autre part ;
-- Un prototype où le point de vue du projectile que tu contrôle est en première personne ;
-- Un controller de personnage où tu peux te déplacer en ZQSD et t’arrêter si tu n’appuies sur rien ;
+- [ ] Utiliser une trainé laissée par le le projectile incarné pour rediriger les projectiles présents sur le terrain ;
+- [ ] Les projectiles explosent redirigeant les projectiles existant dans un certain radius ;
+- [ ] Un proto avec plusieurs “planètes” → dézoomer très loin d’une planète avec la molette, cliquer sur une autre planète l’a fait passer en focus ;
+- [ ] Un prototype où il y a des portails entre ces planètes et en traverser téléporte le projectile sur l’autre planète.
+- [ ] Le projectile que tu contrôles tir régulièrement un petit projectile en face de lui, avec plusieurs propriétés activable/désactivable dans l’éditeur :
+- [ ] Détruit les autres projectiles qu’il rencontre ;
+    - [ ] Durée de vie limité (paramétrable) ;
+    - [ ] Peut détruire le projectile incarné s’il le rerencontrent ;
+- [ ] Mettre pause à tout les projectiles, cliquer individuellement sur un projectile te permettrait de désactiver la pause pour celui-ci ;
+- [ ] Un bouton qui apparait aléatoirement sur le planète, si un projectile rentre en collision avec, le bouton disparait et apparait autre part ;
+- [ ] Un prototype où le point de vue du projectile que tu contrôle est en première personne ;
+- [ ] Un controller de personnage où tu peux te déplacer en ZQSD et t’arrêter si tu n’appuies sur rien ;
