@@ -30,13 +30,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pages_V2/Game Design/Lexique/Types de Projectiles/StraightProjectile.md",
+                "file": "Pages_V2/Game Design/Game Design.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "StraightProjectile"
+              "title": "Game Design"
             }
           },
           {
@@ -45,7 +45,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pages_V2/Game Design/Gameloop de Guardiola.md",
+                "file": "Pages_V2/Game Design/Outils/Gameloop de Guardiola.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
@@ -60,7 +60,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pages_V2/Game Design/Game System.md",
+                "file": "Pages_V2/Game Design/Outils/Game System.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
@@ -132,7 +132,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "5adc534d6c313526",
@@ -243,13 +243,15 @@
   },
   "active": "04b8a0c2b6656fd5",
   "lastOpenFiles": [
-    "Pages_V2/Game Design/Gameloop de Guardiola.md",
+    "Pages_V2/Game Design/Outils/Game System.md",
+    "Pages_V2/Game Design/Outils/Diagramme de Ventrice.md",
+    "Pages_V2/Game Design/Game Design.md",
+    "Pages_V2/Game Design/Outils",
+    "Pages_V2/Game Design/Lexique/Types de Projectiles/StraightProjectile.md",
+    "Pages_V2/Game Design/Outils/Gameloop de Guardiola.md",
     "Pasted image 20261103131305.png",
     "Pages_V2/Game Design/Lexique/Types de Projectiles/SpawnerProjectile.md",
-    "Pages_V2/Game Design/Game System.md",
-    "Pages_V2/Game Design/Game Design.md",
     "Accueil - Donut_Reboot.md",
-    "Pages_V2/Game Design/Lexique/Types de Projectiles/StraightProjectile.md",
     "Pages_V2/Game Design/Lexique/Types de Projectiles/BouncyProjectile.md",
     "Pages_V2/Game Design/Lexique/Types de Projectiles/RotatingProjectile.md",
     "BartNotes/Variation pour le prototype sphérique.md",
@@ -266,7 +268,7 @@
     "Images/Pasted image 20261103115004.png",
     "Pages_V2/Game Design/Lexique/Types de Projectiles",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Direction Artistique/Direction Artistique.md",
-    "Pages_V2/Game Design/Joueur - 3Cs.md",
+    "Pages_V2/Game Design/Outils/Joueur - 3Cs.md",
     "NEPASUTILISER/OLD_RulesDonut/(OLD) Accueil - Donut.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Ability/Ability.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Identity/Identity.md",
@@ -278,7 +280,6 @@
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Game System.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Game Design.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Forces et faiblesses.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Fiche d'identité.md",
     "Pages_V2/Game Design/Lexique",
     "Pages_V2/Game Design/Sans titre.base"
   ]
