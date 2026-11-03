@@ -9,4 +9,5 @@
 - [ ] Mettre pause à tout les projectiles, cliquer individuellement sur un projectile te permettrait de désactiver la pause pour celui-ci ;
 - [ ] Un bouton qui apparait aléatoirement sur le planète, si un projectile rentre en collision avec, le bouton disparait et apparait autre part ;
 - [ ] Un prototype où le point de vue du projectile que tu contrôle est en première personne ;
-- [ ] Un controller de personnage où tu peux te déplacer en ZQSD et t’arrêter si tu n’appuies sur rien ;
+- [x] Un controller de personnage où tu peux te déplacer avec les flèches et t’arrêter ;
+- [ ] le projectile que tu contrôles laisse une trainé derrière qui peut le tuer s'il rentre en collision avec (comme dans Tron)
