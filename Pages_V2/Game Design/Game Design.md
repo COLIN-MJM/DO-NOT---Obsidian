@@ -11,7 +11,6 @@ ___
 ### Joueur
 ___
 - [[Joueur - 3Cs|Joueur - 3Cs]]
-- [[Pages_V2/Game Design/Outils/Inputs|Inputs]]
 - [[Pages_V2/Game Design/Outils/Signes et Feedbacks|Signes et Feedbacks]]
 ### Système
 ___

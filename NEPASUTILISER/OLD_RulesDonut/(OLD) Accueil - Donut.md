@@ -21,9 +21,7 @@ ___
 
 ## Recherches
 ___
-- [[NEPASUTILISER/OLD_RulesDonut/Pages/Recherches/Références]]
-- [[NEPASUTILISER/OLD_RulesDonut/Pages/Recherches/Notes de Recherches]]
-
+- ...
 ## Versions
 ___
 - [[NEPASUTILISER/OLD_RulesDonut/Pages/Prototypes/Prototype v1]]
