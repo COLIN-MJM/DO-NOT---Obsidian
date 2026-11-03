@@ -39,7 +39,8 @@
               "title": "OriginSpawner"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -210,15 +211,15 @@
       "task-center:Open Task Center": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "232fd6df81dcccfa",
   "lastOpenFiles": [
+    "Accueil - Donut_Reboot.md",
     "Pages_V2/Game Design/Lexique/OriginSpawner.md",
     "Pages_V2/Recherches/Notes de Recherches.md",
     "Pages_V2/Gestion de Projet/Gestion de Projet.md",
     "Pages_V2/Recherches/Références.md",
     "Pages_V2/Direction Artistique/Direction Artistique.md",
     "Pages_V2/Documentation Technique/Documentation Technique.md",
-    "Accueil - Donut_Reboot.md",
     "Pages_V2/Game Design/Outils/Game System.md",
     "Pages_V2/Game Design/Game Design.md",
     "Pages_V2/Game Design/Outils/Joueur - 3Cs.md",
