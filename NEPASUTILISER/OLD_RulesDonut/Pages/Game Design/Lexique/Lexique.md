@@ -1,6 +1,6 @@
 ---
 tags:
-  - gamedesign
+  - old
 ---
 ### Définitions globales
 ______________

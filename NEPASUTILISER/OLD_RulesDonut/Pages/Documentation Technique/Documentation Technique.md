@@ -1,5 +1,5 @@
 ---
 tags:
-  - programmation
+  - old
 icon: 💻
 ---

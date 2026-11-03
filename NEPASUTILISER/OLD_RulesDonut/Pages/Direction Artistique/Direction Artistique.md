@@ -1,5 +1,5 @@
 ---
 tags:
-  - gameart
+  - old
 icon: 🎨
 ---

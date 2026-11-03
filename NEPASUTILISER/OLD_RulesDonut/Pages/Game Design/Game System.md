@@ -1,4 +1,5 @@
 ---
 tags:
-  - gamedesign
+  - old
+icon: 📚
 ---

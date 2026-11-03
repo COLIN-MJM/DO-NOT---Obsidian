@@ -2,7 +2,7 @@
 banner: "[[Pasted image 20261030145246.png]]"
 icon: 🏡
 tags:
-  - home
+  - old
 ---
 ## Pitch (Toy)
 ---
