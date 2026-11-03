@@ -1,0 +1,8 @@
+- Effets sur la sphère centrale elle-même
+	- Reliefs → *Des reliefs se créent selon le projectile*
+	    - Creuser
+	    - Élever
+	- Changement de couleur en fonction du nombre de projectiles (?)
+- Quand collisions alors spawn
+    - Quand collision entre 2 projectiles alors éclatement des deux en X nombre (paramétrable) de projectiles plus petits
+	- Quand taille de projectile min atteinte alors les plus petits re-fusionnent OU ils ne se divisent plus
