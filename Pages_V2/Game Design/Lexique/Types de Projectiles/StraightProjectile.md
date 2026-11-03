@@ -7,4 +7,4 @@ ___
 - Comportement : Avance vers son forward
 - Input : A
 - Durée de vie : Infini
-- Couleur : Vert
+- <span style="color:#2f9e44">Couleur : Vert</span>
