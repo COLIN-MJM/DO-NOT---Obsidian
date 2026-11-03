@@ -5,7 +5,7 @@ icon: 🥀
 ___
 
 - Lors de la semaine de recherche, et après 2 semaines de travail, le pôle GD a identifié une difficulté à manipuler le concept actuel, relié à la notion d'atome ludique.
-	- Dans un jeu, nous avons considéré la plus petite intéraction ludique comme un atome, qui amène l'émergence par la création de molécules ludiques.
+	- Dans un jeu, nous avons considéré la plus petite interaction ludique comme un atome, qui amène l'émergence par la création de molécules ludiques.
 	- Cependant, notre jeu souffrait du problème que son concept, à échelle mezzo, n'avait aucun appui sur un concept atomique facilement itérable.
 
 ## Décision de reboot
@@ -15,4 +15,8 @@ ___
 
 ## Enseignements tirés et optiques nouvelles
 ___
-
+ 
+ Après analyse du projet précédent, nous avons tiré certaines réflexions qui nous ont guidé sur le reboot :
+ - Alchimie vs Chimie
+ - Assemblage et sémantique
+ - Attrait de la sphère

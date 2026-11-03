@@ -100,7 +100,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -271,8 +271,9 @@
       "task-center:Open Task Center": false
     }
   },
-  "active": "1de90c08d6f4bd67",
+  "active": "4fa6e8df08a6ec95",
   "lastOpenFiles": [
+    "Pages_V2/Recherches/Références.md",
     "Pages_V2/Mortem - Reboot.md",
     "Accueil - Donut_Reboot.md",
     "Images/Pasted image 20261103131305.png",
@@ -294,7 +295,6 @@
     "Pages_V2/Game Design/Lexique/OriginSpawner.md",
     "Pages_V2/Recherches/Notes de Recherches.md",
     "Pages_V2/Gestion de Projet/Gestion de Projet.md",
-    "Pages_V2/Recherches/Références.md",
     "Pages_V2/Direction Artistique/Direction Artistique.md",
     "Pages_V2/Documentation Technique/Documentation Technique.md",
     "Pages_V2/Game Design/Outils/Tendance système.md",
