@@ -10,7 +10,7 @@
   "targetTags": true,
   "getFromInlineField": false,
   "enableTabHeader": true,
-  "activateSnippet": true,
+  "activateSnippet": false,
   "enableEditor": true,
   "enableFileList": true,
   "enableBacklinks": true,

@@ -17,7 +17,7 @@ ___
 
 ### Système
 ___
-- [[Pages_V2/Game Design/Game System|Game System]]
+- [[NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Game System|Game System]]
 - [[Pages_V2/Game Design/Diagramme de Ventrice|Diagramme de Ventrice]]
 - [[Gameloop de Guardiola]]
--
+- 

@@ -11,5 +11,9 @@
   "spellcheck": true,
   "autoPairBrackets": true,
   "showUnsupportedFiles": false,
-  "propertiesInDocument": "visible"
+  "propertiesInDocument": "visible",
+  "livePreview": true,
+  "defaultViewMode": "source",
+  "autoConvertHtml": true,
+  "vimMode": false
 }
