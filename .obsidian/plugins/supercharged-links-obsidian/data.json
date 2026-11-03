@@ -137,6 +137,18 @@
       "selectAppend": true,
       "selectPrepend": true,
       "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "token",
+      "value": "projectile",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "82e8-68d0",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
     }
   ]
 }
