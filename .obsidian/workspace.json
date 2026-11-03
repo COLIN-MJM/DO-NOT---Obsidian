@@ -86,7 +86,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
     "id": "5adc534d6c313526",
@@ -195,10 +195,6 @@
       "task-center:Open Task Center": false
     }
   },
-  "active": "e7a7b303c61786dc",
-  "lastOpenFiles": [
-    "Pages_V2/Game Design/Game Design.md",
-    "Accueil - Donut_Reboot.md",
-    "Images/Pasted image 20261030145246.png"
-  ]
+  "active": "733e82e69e509acf",
+  "lastOpenFiles": []
 }
