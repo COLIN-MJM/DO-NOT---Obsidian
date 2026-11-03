@@ -14,7 +14,7 @@ Après les premières conclusions du [[NEPASUTILISER/OLD_RulesDonut/Pages/Protot
 
 ## Documentation
 ___
-- [[NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Game Design]]
+- [[NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Game Design]] 
 - [[NEPASUTILISER/OLD_RulesDonut/Pages/Documentation Technique/Documentation Technique]]
 - [[NEPASUTILISER/OLD_RulesDonut/Pages/Direction Artistique/Direction Artistique]]
 - [[NEPASUTILISER/OLD_RulesDonut/Pages/Gestion de Projet/Gestion de Projet]]
