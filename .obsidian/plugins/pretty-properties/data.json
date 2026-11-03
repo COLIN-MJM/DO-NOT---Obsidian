@@ -1,8 +1,5 @@
 {
-  "hiddenProperties": [
-    "banner",
-    "icon"
-  ],
+  "hiddenProperties": [],
   "markdownProperties": [],
   "propertyPillColors": {},
   "propertyLongtextColors": {},
@@ -108,7 +105,7 @@
   "hideMetadataContainerIfAllPropertiesHiddenReading": false,
   "autoHidePropertiesWithBanner": false,
   "hideCoverCollapsed": false,
-  "hidePropTitle": true,
+  "hidePropTitle": false,
   "hideAddPropertyButton": false,
   "dontShowColorMigrationMessage": false,
   "propertyColors": {},
