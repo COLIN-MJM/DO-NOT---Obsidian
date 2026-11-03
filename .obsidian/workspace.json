@@ -25,18 +25,18 @@
             }
           },
           {
-            "id": "341ede039f653f65",
+            "id": "04b8a0c2b6656fd5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pages_V2/Game Design/Game System.md",
+                "file": "Pages_V2/Game Design/Lexique/Projectiles.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Game System"
+              "title": "Projectiles"
             }
           }
         ],
@@ -211,16 +211,24 @@
       "task-center:Open Task Center": false
     }
   },
-  "active": "341ede039f653f65",
+  "active": "04b8a0c2b6656fd5",
   "lastOpenFiles": [
+    "Pages_V2/Game Design/Lexique/Sphère.md",
+    "Images/Pasted image 20261103115050.png",
+    "Images/Pasted image 20261103115408.png",
+    "Images/Pasted image 20261030145246.png",
+    "Images/Pasted image 20261030144008.png",
+    "Images/Pasted image 20261030144058.png",
+    "Images/Pasted image 20261030144226.png",
+    "Images/Pasted image 20261103115004.png",
+    "Pages_V2/Game Design/Game System.md",
+    "Pages_V2/Game Design/Lexique/Projectiles.md",
+    "Pages_V2/Game Design/Lexique/Types de Projectiles",
     "Pages_V2/Game Design/Game Design.md",
     "Accueil - Donut_Reboot.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Direction Artistique/Direction Artistique.md",
-    "Pages_V2/Game Design/Lexique/Projectiles.md",
-    "Pages_V2/Game Design/Lexique/Sphère.md",
     "Pages_V2/Game Design/Joueur - 3Cs.md",
     "Pages_V2/Game Design/Lexique/OriginSpawner.md",
-    "Pages_V2/Game Design/Game System.md",
     "NEPASUTILISER/OLD_RulesDonut/(OLD) Accueil - Donut.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Ability/Ability.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Tokens/Identity/Identity.md",
@@ -238,11 +246,7 @@
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/3Cs.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Game Design/Lexique/Lexique.md",
     "NEPASUTILISER/OLD_RulesDonut/Pages/Gestion de Projet/Gestion de Projet.md",
-    "NEPASUTILISER/OLD_RulesDonut/Pages/Prototypes/Prototype v1.md",
-    "Images/Pasted image 20261103115004.png",
     "Pages_V2/Game Design/Lexique",
-    "Pages_V2/Game Design/Sans titre.base",
-    "Images/Pasted image 20261103115408.png",
-    "Images/Pasted image 20261103115050.png"
+    "Pages_V2/Game Design/Sans titre.base"
   ]
 }
