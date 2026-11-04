@@ -202,8 +202,7 @@
       "direct-git-sync:Sync with GitHub": false,
       "homepage:Open homepage": false,
       "html-font-toolbar:Toggle HTML font toolbar": false,
-      "oriko:Open Oriko": false,
-      "task-center:Open Task Center": false
+      "oriko:Open Oriko": false
     }
   },
   "active": "4e4440e3d32a3482",
