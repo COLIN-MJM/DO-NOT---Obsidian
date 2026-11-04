@@ -9,9 +9,8 @@
 .obsidian/plugins/direct-git-sync/data.json
 
 # User defined ignore rules
-
+.obsidian/app.json
 .obsidian/workspace.json
 .obsidian/snippets/supercharged-links-gen.css
 .obsidian/graph.json
 .obsidian/appearance.json
-.obsidian/app.json
