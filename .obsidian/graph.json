@@ -1,12 +1,34 @@
 {
   "collapse-filter": true,
   "search": "",
-  "showTags": false,
+  "showTags": true,
   "showAttachments": false,
-  "hideUnresolved": false,
-  "showOrphans": true,
+  "hideUnresolved": true,
+  "showOrphans": false,
   "collapse-color-groups": false,
-  "colorGroups": [],
+  "colorGroups": [
+    {
+      "query": "tag:#gamedesign  ",
+      "color": {
+        "a": 1,
+        "rgb": 13601354
+      }
+    },
+    {
+      "query": "tag: #lexique  ",
+      "color": {
+        "a": 1,
+        "rgb": 5514689
+      }
+    },
+    {
+      "query": "tag:#old  ",
+      "color": {
+        "a": 1,
+        "rgb": 16711680
+      }
+    }
+  ],
   "collapse-display": true,
   "showArrow": false,
   "textFadeMultiplier": 0,
@@ -17,6 +39,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.7535637126309879,
+  "scale": 0.7535637126309876,
   "close": false
 }
