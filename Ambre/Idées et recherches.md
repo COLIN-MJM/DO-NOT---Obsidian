@@ -45,7 +45,7 @@
 	- Narratif commun: Insectes, Zombies 
 	- Impossibilité de fuir
 		- Détruire la horde ou détruire l'origine de celle-ci
-	- Contraire de la horde: Simon, un seul individu assez fort pour acculer, boss
+	- Contraire de la horde: Un seul individu assez fort pour acculer le joueur, boss
 
 - Thème de la beauté évoqué par Esteban
 	- Beauté de l'action VS beauté da
@@ -64,3 +64,11 @@
 			- Corde comme outil capable de s'agripper 'à un objet afin de le tirer
 			- [RopeBurn](https://longcon.itch.io/ropeburn)
 				- Corde comme outil permettant de s'attacher à une surface pour mieux se propulser
+	- Idée concept proto:
+		- TOY où on contrôle un "compas", càd un outil qui nous permet de tracer une trajectoire circulaire entre 2 points
+		- Comment ça marche ? 
+			- Start → Joueur planté sur un point
+			- On dessine une trajectoire circulaire (vers l'avant par ex)
+			- On choisit un point parmi cette trajectoire
+			- Le point choisi est le nouveau point de départ
+		- Défi de déplacement (à voir)
