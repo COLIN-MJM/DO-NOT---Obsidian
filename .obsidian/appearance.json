@@ -4,5 +4,6 @@
   "nativeMenus": false,
   "enabledCssSnippets": [
     "supercharged-links-gen"
-  ]
+  ],
+  "theme": "obsidian"
 }
