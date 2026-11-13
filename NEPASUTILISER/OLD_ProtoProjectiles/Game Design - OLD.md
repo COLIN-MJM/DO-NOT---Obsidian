@@ -38,8 +38,6 @@ Contextuel :
  - Si le joueur est dans le POV d'un projectile :
 	 - Altérer la rotation du projectile : Souris (via un slider)
 
-[Insérer schéma d'inputs]
-
 # Camera
 
 ---

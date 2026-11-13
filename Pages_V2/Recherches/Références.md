@@ -4,6 +4,15 @@ tags:
   - wip
 icon: 🔎
 ---
- - Planetarium
- - Once Upon The Universe
- - 
+# Game Design
+___
+- Super Mario Galaxy
+- Gravity Rush
+- Sky : Children of the Light
+
+# Game Art
+___
+- Le Petit Prince
+- Gravity Rush
+- Coraline
+- Princes et Princesses
