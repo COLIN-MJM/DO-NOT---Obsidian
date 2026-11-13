@@ -60,13 +60,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pages_V2/Game Design/Lexique/Corps/Corps - Récepteurs.md",
+                "file": "Pages_V2/Game Design/Outils/Joueur - 3Cs.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Corps - Récepteurs"
+              "title": "Joueur - 3Cs"
             }
           },
           {
@@ -273,9 +273,11 @@
   },
   "active": "4f9dca55c339b7f1",
   "lastOpenFiles": [
+    "Pages_V2/Game Design/Outils/Gameloop de Guardiola.md",
+    "BartNotes/Variation pour le prototype sphérique.md",
+    "Pages_V2/Game Design/Lexique/Corps/Corps - Récepteurs.md",
     "Pages_V2/Game Design/Lexique/Corps/Corps - Neutre.md",
     "Pages_V2/Game Design/Lexique/Corps/Corps - Actif.md",
-    "Pages_V2/Game Design/Lexique/Corps/Corps - Récepteurs.md",
     "Pages_V2/Game Design/Lexique/Corps.md",
     "Pages_V2/Game Design/Lexique/Corps",
     "Images/Pasted image 20261113152431.png",
@@ -300,8 +302,6 @@
     "NEPASUTILISER/OLD_ProtoProjectiles/Lexique/Types de Projectiles/SpawnerProjectile.md",
     "NEPASUTILISER/OLD_ProtoProjectiles/Lexique/Types de Projectiles/RotatingProjectile.md",
     "NEPASUTILISER/OLD_ProtoProjectiles/Lexique/Types de Projectiles/BouncyProjectile.md",
-    "NEPASUTILISER/OLD_ProtoProjectiles/Lexique/Sphère.md",
-    "NEPASUTILISER/OLD_ProtoProjectiles/Lexique/OriginSpawner.md",
     "NEPASUTILISER/OLD_ProtoProjectiles",
     "Images/Pasted image 20261103131305.png",
     "Ambre",
