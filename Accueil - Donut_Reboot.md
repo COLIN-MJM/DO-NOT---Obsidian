@@ -6,11 +6,15 @@ tags:
 ---
 ## Pitch (Toy)
 ---
-TBD
+- Le joueur se déplace de façon particulière dans un système composé de vide et de corps : tant qu'il est dans son champ de vision, le joueur peut se faire attirer par un corps, ce qui lui permet de se déplacer de façon particulière.
+- Intentions : Jeu à 3Cs, même sensations de jeu que Gravity Rush ou Super Mario Galaxy.
 
 ## Approche actuelle
 ___
-Voir [[Mortem - Reboot]].
+- Affinement des [[Joueur - 3Cs]], de façon à avoir déjà des sensations de jeu agréables ;
+- Phase de recherche et d'itération sur le système en lui-même ;
+- Rationalisation de nos intentions de design ;
+- Premières recherches de DA.
 
 ## Documentation
 ___
