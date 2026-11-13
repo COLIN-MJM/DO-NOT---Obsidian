@@ -1,6 +1,6 @@
 ---
 tags:
-  - lexique
+  - old
 ---
 Les [[Projectiles]] sont des objets gravitant autour de la [[Sphère]] instanciés depuis l'[[OriginSpawner]] via l'input du [[Joueur - 3Cs]].
 

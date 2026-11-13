@@ -1,6 +1,6 @@
 ---
 tags:
-  - lexique
+  - old
 ---
 La [[Sphère]] correspond à l'espace de jeu du jouet : c'est sur cette dernière que se situent et intéragisent tous les éléments du système.
 

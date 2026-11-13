@@ -23,4 +23,5 @@ ___
 
 ## Post-Mortem
 ___
-- TBD
+- On en garde l'aspect "gravitation" ainsi que le format de la sphère -> Passage à [[Prototype v2 ]]
+- 
