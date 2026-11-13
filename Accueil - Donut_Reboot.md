@@ -21,7 +21,6 @@ ___
 - [[Pages_V2/Game Design/Game Design|Game Design]]
 - [[Pages_V2/Documentation Technique/Documentation Technique|Documentation Technique]]
 - [[Pages_V2/Direction Artistique/Direction Artistique|Direction Artistique]]
-- [[Pages_V2/Gestion de Projet/Gestion de Projet|Gestion de Projet]]
 
 ## Recherches
 ___

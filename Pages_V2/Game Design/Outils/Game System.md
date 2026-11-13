@@ -4,6 +4,6 @@ tags:
 icon: 📚
 ---
 
-Le jeu s'articule autour d'un système, composé de vide et de corps.
+Le jeu s'articule autour d'un [[Système]], composé de [[Vide]] et de [[Corps]].
 
 
